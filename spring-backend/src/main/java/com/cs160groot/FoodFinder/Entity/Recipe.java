@@ -20,6 +20,14 @@ public class Recipe {
 
     public Recipe(){}
 
+    public Recipe(String tit, String at, String date, String ... args ){
+        this.title = tit;
+        this.author = at;
+        this.date = date;
+        this.ingredients = null;
+        this.instructions = null;
+    }
+
     public Recipe(String tit, String at, String date, ArrayList<String> igs, ArrayList<String> inst){
         this.title = tit;
         this.author = at;
