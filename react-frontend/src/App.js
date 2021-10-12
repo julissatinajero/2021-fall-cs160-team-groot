@@ -1,28 +1,15 @@
 import Axios from 'axios';
+import React, {Component} from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import HomeMasthead from './components/homeMasthead';
 
-const App = () => {
-
-
-    const getUsers = () => {
-        Axios.get('http://localhost:8080/api/users')
-            .then(
-                response => {
-                    console.log(response);
-                }
-            )
+class App extends Component {
+    render(){
+        return(
+            <HomeMasthead/>
+        )
     }
-
-    return (
-        <div className="App">
-            <h1>Hello from React</h1>
-            <input 
-                type="submit" 
-                value="Press to test connection to spring"
-                onClick={getUsers}
-            />
-        </div>
-    );
 }
 
 export default App;
