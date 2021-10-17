@@ -5,6 +5,8 @@ import head from '../resources/StockFood.png';
 //import 'react-frontend/src/App.css';
 //import 'react-frontend/src/index.css';
 
+// TODO: Add in the search icon from FontAwesome
+
 export default class HomeMasthead extends Component {
 
     render(){
@@ -13,11 +15,14 @@ export default class HomeMasthead extends Component {
             <div className="container-fluid">
                 <div className="d-flex align-items-center row">
                     <div className="col-7">
-                        <div className="align-baseline">
-                            <h1 className="title">Food Finder</h1>
-                            <h2>Start finding recipes now</h2>
-                            <input type="text" className="my-3"/>
-                            <div className="row">
+                        <div className="mb-5">
+                            <h1 className="title ff-font d-flex justify-content-center">Food Finder</h1>
+                            <h2 className="d-flex justify-content-center">Start finding recipes now</h2>
+                            <div className="d-flex justify-content-center my-3">
+                                <input type="text" className="searchBar py-1"/>
+                                <button className="buttonSearch col-1 py-1">A</button>
+                            </div>                            
+                            <div className="row d-flex justify-content-center">
                                 <button className="buttonHome col-4 mx-2">Sign-In</button>
                                 <button className="buttonHome col-4 mx-2">Sign-Up</button>
                             </div>

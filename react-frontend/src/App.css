@@ -38,17 +38,21 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
-body {
+.ff-font {
   font-family: 'Gabriela', Arial, Helvetica, sans-serif;
   color: #6da778;
 }
 
+.ff-altcolor {
+  color: #6d7fa7;
+}
+
 .title {
-  font-size: 400%;
+  font-size: 350%;
 }
 
 .buttonHome {
-  background-color: #7bed8d; /* Green */
+  background-color: #89d197; /* Green, formerly 7bed8d */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -57,4 +61,28 @@ body {
   display: inline-block;
   font-size: medium;
   border-radius: 12px;
+}
+
+.buttonSearch {
+  background-color: #89d197; /* Green, formerly 7bed8d */
+  border: none;
+  color: white;
+  padding: 10px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: medium;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.searchBar {
+  font-size: medium;
+  min-width: 50%;
+  max-width: 100%;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-width: 1px;
+  border-color: #6d7fa7;
+  padding-left: 10px;
 }
