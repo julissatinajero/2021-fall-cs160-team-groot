@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../App.css';
 import head from '../resources/StockFood.png';
-//import 'react-frontend/src/App.css';
-//import 'react-frontend/src/index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // TODO: Add in the search icon from FontAwesome
 
@@ -20,7 +20,7 @@ export default class HomeMasthead extends Component {
                             <h2 className="d-flex justify-content-center">Start finding recipes now</h2>
                             <div className="d-flex justify-content-center my-3">
                                 <input type="text" className="searchBar py-1"/>
-                                <button className="buttonSearch col-1 py-1">A</button>
+                                <button className="buttonSearch col-1 py-1"><FontAwesomeIcon icon={faSearch}/></button>
                             </div>                            
                             <div className="row d-flex justify-content-center">
                                 <button className="buttonHome col-4 mx-2">Sign-In</button>
