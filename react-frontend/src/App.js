@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import HomeMasthead from './components/homeMasthead';
+import SignUpPage from './components/SignUpPage';
 import SearchResults from './components/searchResults';
 
 /**
@@ -17,6 +18,7 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/search" component={SearchResults}/>
+                    <Route path="/sign-up" component={SignUpPage}/>
                     <Route path="/" component={App}/>
                 </Switch>
             </BrowserRouter>
