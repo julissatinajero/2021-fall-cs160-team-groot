@@ -5,6 +5,8 @@ import './index.css';
 import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import HomeMasthead from './components/homeMasthead';
 import SearchResults from './components/searchResults';
+import SignIn from './components/signIn';
+import SignUpPage from './components/SignUpPage';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -13,6 +15,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
           <Route path="/search" component={SearchResults}/>
+          <Route path="/sign-up" component={SignUpPage}/>
+          <Route path="/sign-in" component={SignIn}/>
           <Route path="/" component={HomeMasthead}/>
       </Switch>
     </BrowserRouter>
