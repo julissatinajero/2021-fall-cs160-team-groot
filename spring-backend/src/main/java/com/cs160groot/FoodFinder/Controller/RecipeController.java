@@ -21,7 +21,7 @@ import com.cs160groot.FoodFinder.Repository.RecipeRepository;
 @RequestMapping("/api/recipe")
 public class RecipeController {
 	@Autowired
-	private final RecipeRepository recipeRepository;
+	private RecipeRepository recipeRepository;
 	
 	public RecipeController(RecipeRepository recipeRepository)
 	{
@@ -40,10 +40,10 @@ public class RecipeController {
 		return recipeRepository.findAll();
 	}
 	
-	@GetMapping("/id={recipe_id}")
-	public Optional<Recipe> getRecipeById(@PathVariable int recipe_id)
+	@GetMapping("/{recipeID}")
+	public Optional<Recipe> getRecipeById(@PathVariable int recipeID)
 	{
-		return recipeRepository.findById(recipe_id);
+		return recipeRepository.findById(recipeID);
 	}
 	
 	
