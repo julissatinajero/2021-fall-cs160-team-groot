@@ -7,16 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AppUser {
 	@Id
 	private int userID;
-	
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String username;
 	private String password;
 	
-	public AppUser() {
-		// TODO Auto-generated constructor stub
-	}
+	public AppUser() {}
 	
 	public AppUser(int userID, String firstName, String lastName, String email, String username, String password) {
 		this.userID = userID;
