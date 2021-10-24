@@ -1,0 +1,33 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+  
+  .title-signIn {
+    font-size: 350%;
+    padding-bottom: 30px;
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    color: #6da778;
+  }
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .padding {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+  }
+
+  .signInButton {
+    background-color: #5daa6b; /* Green, formerly 7bed8d */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px
+  }
