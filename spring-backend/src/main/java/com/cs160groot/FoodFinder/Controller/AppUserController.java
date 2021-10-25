@@ -1,5 +1,7 @@
 package com.cs160groot.FoodFinder.Controller;
 
+import java.util.ArrayList; 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs160groot.FoodFinder.Entity.AppUser;
+import com.cs160groot.FoodFinder.Entity.Preferences;
 import com.cs160groot.FoodFinder.Repository.AppUserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -33,6 +36,24 @@ public class AppUserController {
 	@PostMapping
 	public AppUser postAppUser(@RequestBody AppUser appUser) {
 		return appUserRepository.save(appUser);
+	}
+	
+	@GetMapping("/preferences/{userID}")
+	public Preferences getPreferences(@PathVariable int userID) {
+		Optional<AppUser> user = appUserRepository.findById(userID);
+		return user.get().getPreferences();
+	}
+	
+	@GetMapping("/favorites/{userID}")
+	public ArrayList<Integer> getFavorites(@PathVariable int userID) {
+		Optional<AppUser> user = appUserRepository.findById(userID);
+		return user.get().getFavorited();
+	}
+	
+	@GetMapping("/uploads/{userID}")
+	public ArrayList<Integer> getUploads(@PathVariable int userID) {
+		Optional<AppUser> user = appUserRepository.findById(userID);
+		return user.get().getUploaded();
 	}
 	
 }
