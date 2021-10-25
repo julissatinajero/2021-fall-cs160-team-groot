@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../App.css';
 import '../css/home.css';
@@ -8,6 +8,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default class HomeMasthead extends Component {
+    redirectSignin = () => {
+        this.props.history.push("/sign-in")
+    }
+
+    redirectSignup = () =>{
+        this.props.history.push("/sign-up")
+    }
+
+    // This will need to be changed when incorporating search terms
+    redirectSearch = () =>{
+        this.props.history.push("/sign-up")
+    }
 
     render(){
         // Before render
@@ -20,13 +32,11 @@ export default class HomeMasthead extends Component {
                             <h2 className="d-flex justify-content-center">Start finding recipes now</h2>
                             <div className="d-flex justify-content-center my-3">
                                 <input type="text" className="searchBar py-1"/>
-                                <button className="buttonSearch col-1 py-1">
-                                    <Link to="/search"><FontAwesomeIcon icon={faSearch}/></Link>
-                                </button>
+                                <button className="buttonSearch col-1 py-1" onClick={this.redirectSearch}><FontAwesomeIcon icon={faSearch}/></button>
                             </div>                            
                             <div className="row d-flex justify-content-center">
-                                <button className="buttonHome col-4 mx-2">Sign-In</button>
-                                <button className="buttonHome col-4 mx-2">Sign-Up</button>
+                                <button className="buttonHome col-4 mx-2" onClick={this.redirectSignin}>Sign-In</button>
+                                <button className="buttonHome col-4 mx-2" onClick={this.redirectSignup}>Sign-Up</button>
                             </div>
                         </div>
                     </div>
