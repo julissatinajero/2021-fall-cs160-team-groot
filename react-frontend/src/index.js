@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import './index.css';
 import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import HomeMasthead from './components/homeMasthead';
@@ -9,6 +10,7 @@ import SignIn from './components/signIn';
 import SignUpPage from './components/SignUpPage';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ProfilePage from './components/profile';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +19,7 @@ ReactDOM.render(
           <Route path="/search" component={SearchResults}/>
           <Route path="/sign-up" component={SignUpPage}/>
           <Route path="/sign-in" component={SignIn}/>
+          <Route path="/profile" component={ProfilePage}/>
           <Route path="/" component={HomeMasthead}/>
       </Switch>
     </BrowserRouter>
