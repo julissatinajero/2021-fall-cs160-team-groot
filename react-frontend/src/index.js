@@ -4,18 +4,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import './index.css';
 import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import App from './App';
 import HomeMasthead from './components/homeMasthead';
 import SearchResults from './components/searchResults';
 import SignIn from './components/signIn';
 import SignUpPage from './components/SignUpPage';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ProfilePage from './components/profile';
+import DisplayPage from './components/DisplayPage';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
+          <Route path="/display" component={DisplayPage}/>
           <Route path="/search" component={SearchResults}/>
           <Route path="/sign-up" component={SignUpPage}/>
           <Route path="/sign-in" component={SignIn}/>
