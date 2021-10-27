@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
 import '../css/SignUp.css';
 import {Button, Form, Card} from 'react-bootstrap';
 import validation from "./SignUpValidation"

@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import { Link, Redirect } from "react-router-dom";
-import { withRouter } from "react-router";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/profile.css"
 import icon from '../resources/StockFood.png';
 
@@ -60,7 +57,7 @@ const ProfilePage = (props) => {
                                 <RecipeCard data={data} />
                             </Col>
                         ))}
-                        <Col xs={3} className="mb-2" key={'${data.id}'}>
+                        <Col xs={3} className="mb-2">
                             <UtilityCard data={favorite_recipes} />
                         </Col>
                     </div>

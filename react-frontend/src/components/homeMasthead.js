@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import { Link, Redirect } from "react-router-dom";
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import '../App.css';
 import '../css/home.css';
 import head from '../resources/StockFood.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
