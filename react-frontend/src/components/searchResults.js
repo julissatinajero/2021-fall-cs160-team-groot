@@ -11,10 +11,13 @@ import dmmydata from '../dummyData';
 import RecipeCard from '../components/recipeCard';
 
 export default class SearchResults extends Component {
+    redirectSearch = () =>{
+        this.props.history.push("/search")
+    }
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid search-container-fluid">
                 <Container>
                     <div class="row justify-content-md-center">
                         <div class="col-3">
@@ -110,8 +113,8 @@ export default class SearchResults extends Component {
                                 <h1 className="searchTitle">Search Results</h1>
                                 <Row>
                                 <input type="text" className="searchBar py-1" />
-                                <button className="buttonSearch col-1 py-1">
-                                    <Link to="/search"><FontAwesomeIcon icon={faSearch} /></Link>
+                                <button className="buttonSearch col-1 py-1" onClick={this.redirectSearch}>
+                                    <FontAwesomeIcon icon={faSearch} />
                                 </button>
                                 </Row>
                                 <Row>

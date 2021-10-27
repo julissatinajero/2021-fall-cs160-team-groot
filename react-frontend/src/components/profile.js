@@ -1,10 +1,30 @@
 import React, {Component} from "react";
 import { Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/profile.css"
 import icon from '../resources/StockFood.png';
 
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import dmmydata from '../dummyData';
+import RecipeCard from '../components/recipeCard';
+import UtilityCard from '../components/utilityCard';
+
+
 // To get to profile page, we need the user credentials, otherwise return to the home page
+
+// Messages for the cards at the end of the profile list
+let your_recipes = {
+    "id": 100,
+    "message": "View all of your created recipes",
+    "locmessage": "View"
+}
+
+let favorite_recipes = {
+    "id": 101,
+    "message": "View all of your favorited recipes",
+    "locmessage": "View"
+}
 
 const ProfilePage = (props) => {
     // Redirect if no credentials were placed in
@@ -12,7 +32,7 @@ const ProfilePage = (props) => {
     return (
         <div className="container">
             <div className="row mt-3">
-                <div className="col-lg-3 card pb-3 fixed-left">
+                <div className="col-lg-3 card">
                     <img src={icon} alt="Profile Picture" className="card-img-top img-circle"/>
                     <p className="text-center">{props.username ? props.username : "No Profile"}</p>
                     <button className="buttonAccount mb-2">Account Settings</button>
@@ -20,25 +40,30 @@ const ProfilePage = (props) => {
                     <button className="buttonAccount">Food Preferences</button>
                     {/* Change diet and restrictions that automatically apply */}
                 </div>
-                <div className="col-lg-9 card pt-3 pb-3">
-                    <h3 className="ff-font">Your recipes</h3>
+                <div className="col-lg-9 card">
+                    <h3 className="ff-font pt-3">Your recipes</h3>
                     {/* List of created recipes */}
-                    <div className="row flex-row flex-nowrap scrollable">
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
+                    <div className="row flex-row flex-nowrap scrollable py-2">
+                        {dmmydata.map(data => (
+                            <Col xs={3} className="mb-2" key={'${data.id}'}>
+                                <RecipeCard data={data} />
+                            </Col>
+                        ))}
+                        <Col xs={3} className="mb-2" key={'${data.id}'}>
+                            <UtilityCard data={your_recipes} />
+                        </Col>
                     </div>
-                    <h3 className="ff-font">Favorite recipes</h3>
-                    <div className="row flex-row flex-nowrap scrollable">
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
-                        <div className="col-4"><p>test</p></div>
+                    <h3 className="ff-font pt-3">Favorite recipes</h3>
+                    <div className="row flex-row flex-nowrap scrollable py-2">
+                        {dmmydata.map(data => (
+                            <Col xs={3} className="mb-2" key={'${data.id}'}>
+                                <RecipeCard data={data} />
+                            </Col>
+                        ))}
+                        <Col xs={3} className="mb-2" key={'${data.id}'}>
+                            <UtilityCard data={favorite_recipes} />
+                        </Col>
                     </div>
-                    {/* List of favorite recipes */}
                 </div>
             </div>
         </div>
