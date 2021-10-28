@@ -1,32 +1,68 @@
-import React, { Component } from "react";
-import { Form, Card } from 'react-bootstrap'
+import React,{useState} from 'react';
+import { Form, Card, Button } from 'react-bootstrap'
 import '../css/signIn.css';
+import validationSignIn from "./signInValidation"
 
-export default class SignIn extends Component {
+const SignIn = () => {
+    
+    // Initial value assignment
+    const [values, setValues] = useState({
+        signinUsername: "",
+        signinPassword: ""
+    });
 
-    render() {
-        return (
-            <div className="outer-container-signIn">
-                <Card style={{ width: "45%"}}>
-                    <Card.Body>
-                        <Card.Title><h1 class="text-center ff-font">Sign In</h1></Card.Title>
-                        <Form className="formStyling-signIn">
-                            <Form.Group controlId="signin-username">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="text" placeholder="Enter username" />
-                            </Form.Group>
+    const [errors, setErrors] = useState({});
 
-                            <Form.Group controlId="signin-password" style={{ paddingTop: '20px' }}>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Enter password" />
-                            </Form.Group>
-                            <div className="signIn-button-formatting">
-                                <button className="signIn-button-styling" type="submit">Sign In</button>
-                            </div>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
-        )
+    const HandleChange = (event) => {
+        // Sets the value for each input field
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value
+        });
     }
+
+    const HandleFormSubmit = (event) => {
+        event.preventDefault();
+        // Validate user input
+        setErrors(validationSignIn(values));
+    };
+
+    return (
+        <div className="outer-container-signIn">
+            <Card style={{ width: "45%" }}>
+                <Card.Body>
+                    <Card.Title><h1 class="text-center ff-font">Sign In</h1></Card.Title>
+                    <Form className="formStyling-signIn">
+                        <Form.Group controlId="signinUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name = "signinUsername"
+                                placeholder="Enter username"
+                                value={values.signinUsername}
+                                onChange={HandleChange} 
+                            />
+                            {errors.signinUsername && <p className="error">{errors.signinUsername}</p>}
+                        </Form.Group>
+
+                        <Form.Group controlId="signinPassword" style={{ paddingTop: '20px' }}>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control 
+                                type="password" 
+                                name = "signinPassword"
+                                placeholder="Enter password" 
+                                value={values.signinPassword}
+                                onChange={HandleChange}
+                            />
+                            {errors.signinPassword && <p className="error">{errors.signinPassword}</p>}
+                        </Form.Group>
+                        <div className="signIn-button-formatting">
+                            <Button className="signIn-button-styling" variant="success" type="submit" onClick={HandleFormSubmit}>Sign In </Button>
+                        </div>
+                    </Form>
+                </Card.Body>
+            </Card>
+        </div>
+    )
 }
+export default SignIn
