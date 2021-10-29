@@ -2,6 +2,9 @@
     {
         "recipe_id": 1,
         "recipe_name": "Fresh Salad",
+        "ingredients": ["lettuce","tomato","spinach","sprouts","garlic dressing","salt", "pepper"],
+        "menu": ["vegetarian", "vegan"],
+        "restrictions": ["soy-free", "gluten-free", "egg-free", "shellfish-free"],
         "calorie_count": 200,
         "prep_time": 10
     },
@@ -9,6 +12,9 @@
     {
         "recipe_id": 2,
         "recipe_name": "Vegan Pasta",
+        "ingredients": ["pasta", "pesto"],
+        "menu": ["vegetarian", "vegan"],
+        "restrictions": ["shellfish-free"],
         "calorie_count": 400,
         "prep_time": 30
     },
@@ -16,6 +22,9 @@
     {
         "recipe_id": 3,
         "recipe_name": "Sushi",
+        "ingredients": ["seaweed", "sushi rice", "salmon"],
+        "menu": ["pescatarian"],
+        "restrictions": ["nut-free"],
         "calorie_count": 300,
         "prep_time": 30
     },
@@ -23,6 +32,9 @@
     {
         "recipe_id": 4,
         "recipe_name": "Tomatoe Soup",
+        "ingredients": ["tomatoes", "chicken broth", "salt"],
+        "menu": ["pescatarian"],
+        "restrictions": ["soy-free"],
         "calorie_count": 250,
         "prep_time": 40
     }

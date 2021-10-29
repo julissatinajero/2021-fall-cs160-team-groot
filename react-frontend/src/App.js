@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import HomeMasthead from './components/homeMasthead';
 import SignUpPage from './components/SignUpPage';
-import SearchResults from './components/searchResults';
+import SearchResults from './components/SearchResults';
 
 /**
  * Currently does not work, routing is being handled by the index.js file
