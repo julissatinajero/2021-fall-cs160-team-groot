@@ -9,6 +9,7 @@ import SignIn from './components/signIn';
 import SignUpPage from './components/SignUpPage';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CreateRecipePage from './components/CreateRecipe';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
           <Route path="/search" component={SearchResults}/>
           <Route path="/sign-up" component={SignUpPage}/>
           <Route path="/sign-in" component={SignIn}/>
+          <Route path="/create" component={CreateRecipePage}/>
           <Route path="/" component={HomeMasthead}/>
       </Switch>
     </BrowserRouter>
