@@ -10,6 +10,9 @@ import dmmydata from '../dummyData';    // Delete this import of the json file l
 import RecipeCard from '../components/recipeCard';
 
 export default class SearchResults extends Component {
+    redirectSearch = () =>{
+        this.props.history.push("/search")
+    }
 
     render() {
         return (
@@ -102,8 +105,8 @@ export default class SearchResults extends Component {
                             <h1 className="searchTitle">Search Results</h1>
                             <Row>
                                 <input type="text" className="searchBar py-1" />
-                                <button className="buttonSearchResult col-1 py-1">
-                                    <Link to="/search"><FontAwesomeIcon icon={faSearch} color="white" /></Link>
+                                <button className="buttonSearch col-1 py-1" onClick={this.redirectSearch}>
+                                    <FontAwesomeIcon icon={faSearch} />
                                 </button>
                             </Row>
                             <Row>
