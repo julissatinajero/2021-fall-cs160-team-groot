@@ -32,7 +32,7 @@
     {
         "recipe_id": 4,
         "recipe_name": "Tomatoe Soup",
-        "ingredients": ["tomatoes", "chicken broth", "salt"],
+        "ingredients": ["tomato", "chicken broth", "salt"],
         "menu": ["pescatarian"],
         "restrictions": ["soy-free"],
         "calorie_count": 250,

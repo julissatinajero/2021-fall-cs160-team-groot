@@ -24,6 +24,16 @@
     min-width: 60%;
     max-width: 70%;
     padding-left: 10px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.searchIcon{
+    color: #599163;
+    font-size: large;
+    background-color: white;
+    display: inline-block;
+    padding-left: 10px;
 }
 
 .recipeResults{
