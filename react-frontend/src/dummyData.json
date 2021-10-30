@@ -1,0 +1,29 @@
+[
+    {
+        "recipe_id": 1,
+        "recipe_name": "Fresh Salad",
+        "calorie_count": 200,
+        "prep_time": 10
+    },
+
+    {
+        "recipe_id": 2,
+        "recipe_name": "Vegan Pasta",
+        "calorie_count": 400,
+        "prep_time": 30
+    },
+    
+    {
+        "recipe_id": 3,
+        "recipe_name": "Sushi",
+        "calorie_count": 300,
+        "prep_time": 30
+    },
+
+    {
+        "recipe_id": 4,
+        "recipe_name": "Tomatoe Soup",
+        "calorie_count": 250,
+        "prep_time": 40
+    }
+]
