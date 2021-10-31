@@ -1,0 +1,38 @@
+.dot {
+    height: 200px;
+    width: 200px;
+    background-color: #bbb;
+    border-radius: 30%;
+    display: inline-block;
+}
+
+.buttonAccount {
+    background-color: #89d197; /* Green, formerly 7bed8d */
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: medium;
+    border-radius: 12px;
+}
+
+.img-circle {
+    clip-path: circle(40%);
+}
+
+.no-outline {
+    outline: none;
+}
+
+.scrollable {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.card-text {
+    /**text-overflow: ellipsis;
+    overflow: hidden;*/
+    white-space: normal;
+}
