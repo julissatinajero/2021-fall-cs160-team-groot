@@ -26,6 +26,7 @@ const SignUpPage = () => {
     }
 
     const HandleFormSubmit = (event) => {
+        console.log(values);
         event.preventDefault();
         //Validating user input
         setErrors(validation(values));
