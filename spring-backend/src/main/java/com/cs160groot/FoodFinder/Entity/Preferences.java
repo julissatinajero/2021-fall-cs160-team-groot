@@ -17,8 +17,8 @@ public class Preferences {
 		this.restrictions = restrictions;
 	}
 	
-	public Preferences(ArrayList<String> ingredients, ArrayList<String> diet) {
-		this.ingredients = ingredients;
+	public Preferences(ArrayList<String> diet) {
+		this.ingredients = new ArrayList<>();
 		this.diet = diet;
 		this.restrictions = new ArrayList<>();
 	}
