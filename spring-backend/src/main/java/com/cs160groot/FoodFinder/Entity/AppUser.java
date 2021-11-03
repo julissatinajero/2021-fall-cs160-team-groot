@@ -1,8 +1,6 @@
 package com.cs160groot.FoodFinder.Entity;
 
 import java.util.ArrayList; 
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
