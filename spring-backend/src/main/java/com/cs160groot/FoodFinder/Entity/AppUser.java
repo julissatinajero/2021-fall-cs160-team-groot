@@ -2,6 +2,7 @@ package com.cs160groot.FoodFinder.Entity;
 
 import java.util.ArrayList; 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -31,7 +32,7 @@ public class AppUser {
 		this.password = password;
 		this.uploaded = new ArrayList<>();
 		this.favorited = new ArrayList<>();
-		this.preferences = preferences;
+		this.preferences = new Preferences();
 	}
 	
 	public String getUserID() {
