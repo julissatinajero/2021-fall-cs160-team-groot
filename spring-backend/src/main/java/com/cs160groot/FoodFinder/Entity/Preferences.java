@@ -8,7 +8,9 @@ public class Preferences {
 	private ArrayList<String> restrictions;
 
 	public Preferences() {
-		// TODO Auto-generated constructor stub
+		ingredients = new ArrayList<>();
+		diet = new ArrayList<>();
+		restrictions = new ArrayList<>();
 	}
 	
 	public Preferences(ArrayList<String> ingredients, ArrayList<String> diet, ArrayList<String> restrictions) {

@@ -2,6 +2,7 @@ package com.cs160groot.FoodFinder.Entity;
 
 import java.util.ArrayList; 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class AppUser {
 	@Id
-	private int userID;
+	private String userID;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -21,24 +22,23 @@ public class AppUser {
 	
 	public AppUser() {}
 	
-	public AppUser(int userID, String firstName, String lastName, String email, String username, String password, 
-			ArrayList<Integer> uploaded, ArrayList<Integer> favorited, Preferences preferences) {
-		this.userID = userID;
+	public AppUser(String firstName, String lastName, String email, String username, String password) {
+		this.userID = UUID.fromString(email).toString();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.uploaded = uploaded;
-		this.favorited = favorited;
+		this.uploaded = new ArrayList<>();
+		this.favorited = new ArrayList<>();
 		this.preferences = preferences;
 	}
 	
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 	
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
