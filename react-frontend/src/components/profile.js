@@ -7,24 +7,28 @@ import dmmydata from '../dummyData';
 import RecipeCard from '../components/recipeCard';
 import UtilityCard from '../components/utilityCard';
 
+import UserDataService from '../services/user.service';
 
 // To get to profile page, we need the user credentials, otherwise return to the home page
 
 // Messages for the cards at the end of the profile list
 let your_recipes = {
-    "id": 100,
+    id: 100,
     "message": "View all of your created recipes",
     "locmessage": "View"
 }
 
 let favorite_recipes = {
-    "id": 101,
+    id: 101,
     "message": "View all of your favorited recipes",
     "locmessage": "View"
 }
 
 const ProfilePage = (props) => {
     // Redirect if no credentials were placed in
+    // If props has id, try to retrieve
+    // If retrieval is not possible, return error
+    console.log(props);
 
     return (
         <div className="container">

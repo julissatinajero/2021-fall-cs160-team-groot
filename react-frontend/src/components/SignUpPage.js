@@ -3,6 +3,8 @@ import '../css/SignUp.css';
 import {Button, Form, Card} from 'react-bootstrap';
 import validation from "./SignUpValidation"
 
+import UserDataService from '../services/user.service';
+
 const SignUpPage = () => {
     //Assigning initial values of each variable
     const [values, setValues] = useState({
@@ -29,6 +31,37 @@ const SignUpPage = () => {
         event.preventDefault();
         //Validating user input
         setErrors(validation(values));
+        // Submit the request to the backend
+        /**Format
+         * private int userID;
+         * private String firstName;
+         * private String lastName;
+         * private String email;
+         * private String username;
+         * private String password;
+         * private ArrayList<Integer> uploaded;
+         * private ArrayList<Integer> favorited;
+         * private Preferences preferences;
+         */
+        let data = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            username: values.username,
+            password: values.password,
+            uploaded: [],
+            favorited: [],
+            preferences: null,
+        };
+        UserDataService.post(data).then(
+            (response) => {
+                console.log(response.data);
+            }
+        ).catch(
+            (e) => {
+                console.log(e);
+            }
+        );
     };
 
     return (
