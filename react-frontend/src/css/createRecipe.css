@@ -1,0 +1,36 @@
+/*.outer-container-Create{
+    background-image: url(https://cdn.dribbble.com/users/6407551/screenshots/14739480/media/ad2c082….png?compress=1&resize=1600x1200) !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+}
+
+.inner-container-Create{
+    margin: auto;
+    width: 60%;
+    border: 2px solid;
+    padding: 10px;
+    background: white;
+}*/
+
+.form-style-Create{
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}*/
+
+.Author-Date{
+    padding-bottom: 15px;
+}
+
+.outer-div-one-btn{
+    height: 97px;
+}
+
+.outer-div-two-btn{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
