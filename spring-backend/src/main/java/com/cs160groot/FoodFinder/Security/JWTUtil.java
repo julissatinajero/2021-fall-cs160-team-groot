@@ -14,6 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JWTUtil {
 	private final String SECRET_KEY = "ai1CK8uoSQVI8gSoxTjvkfp0FFw3wE5+dAvWyASWufQX4Ve2XnivIcu0HFVoPBV4TPxTnQ2wzKTFr0jeRJ7jIBcH68eUhWVe5aMo8zQRvEGvjYUa/hQPZIm7wnP7dAELg8Pxy7grewrbh9Il02JRw1aG47cTuNiEwSordYA9HT8HwXRxW9p1iQZRmgUfGY93VOfsN76ces9W8HyU3qA//XhE9uUgMqOj3ZdgeZzuvd83ihJvZIk/CXHor/XoUAvrFV9g4X8n/IGuaiRdjVB0AZaUd9giwOc7UPvHrVIbn3452dNv2F3BGrZkzDfF/GCDHIzg8pVQ/RNUNCge2fkpW";
+	private final int TWELVE_HOURS = 43200000;
 	
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
@@ -44,7 +45,7 @@ public class JWTUtil {
 	
 	private String createToken(Map<String, Object> claims, String subject) {
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 600000))
+				.setExpiration(new Date(System.currentTimeMillis() + TWELVE_HOURS))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
 	}
 	

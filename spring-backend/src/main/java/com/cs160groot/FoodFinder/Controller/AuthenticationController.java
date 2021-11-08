@@ -5,19 +5,21 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cs160groot.FoodFinder.Entity.AppUser;
 import com.cs160groot.FoodFinder.Repository.AppUserRepository;
 import com.cs160groot.FoodFinder.Security.AuthenticationRequest;
 import com.cs160groot.FoodFinder.Security.AuthenticationResponse;
 import com.cs160groot.FoodFinder.Security.JWTUtil;
-import com.cs160groot.FoodFinder.Security.UserDetailsImpl;
 import com.cs160groot.FoodFinder.Security.UserDetailsServiceImpl;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
@@ -27,7 +29,11 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	private final JWTUtil jwtUtil;
+	
+	
 	
 	public AuthenticationController(AppUserRepository appUserRepository) {
 		this.appUserRepository = appUserRepository;
@@ -39,6 +45,7 @@ public class AuthenticationController {
 		if (appUserRepository.findByEmail(appUser.getEmail()).isPresent()) {
 			return ResponseEntity.badRequest().body("Error: Email is already used.");
 		} else {
+			appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
 			appUserRepository.save(appUser);
 			return ResponseEntity.ok("User registered successfully.");
 		}
@@ -55,4 +62,10 @@ public class AuthenticationController {
 		final String jwt = jwtUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}	
+	
+	@GetMapping
+	public String test() {
+		return "Hello";
+	}
+	
 }
