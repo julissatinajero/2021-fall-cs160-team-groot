@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Recipe {
 	@Id
 	private int recipeID;
-	private String recipeName;
+	private String name;
 	private int authorID;
 	private List<String> ingredients;
 	private String directions;
@@ -24,7 +24,7 @@ public class Recipe {
 	
 	public Recipe(int recipeID, String recipeName, int authorID, List<String> ingredients, String directions, List<String> menu, List<String> restrictions, int calorieCount, int prepTime) {
 		this.recipeID = recipeID;
-		this.recipeName = recipeName;
+		this.name = recipeName;
 		this.authorID = authorID;
 		this.ingredients = ingredients;
 		this.directions = directions;
@@ -41,7 +41,7 @@ public class Recipe {
 	}
 	
 	public String getRecipeName() {
-		return recipeName;
+		return name;
 	}
 	
 	public int getAuthorID() {
@@ -81,7 +81,7 @@ public class Recipe {
 	}
 	
 	public void setRecipeName(String recipeName) {
-		this.recipeName = recipeName;
+		this.name = recipeName;
 	}
 	
 	public void setAuthorID(int authorID) {
