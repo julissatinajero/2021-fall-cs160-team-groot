@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/createRecipe.css';
-import { Container, Button, Form, Row, Col, Dropdown } from 'react-bootstrap';
+import {Button, Form, Row, Col, Dropdown } from 'react-bootstrap';
 
 const CreateRecipePage = () => {
     const [values, setValues] = useState({
@@ -29,7 +29,7 @@ const CreateRecipePage = () => {
         <div className="outer-container-Create">
             <div className="inner-container-Create">
                 <Form className="form-style-Create">
-                    <h1>Create a new recipe</h1>
+                    <h1 className="create-form-title">Create a new recipe</h1>
                     <Row>
                         <div className="Author-Date">Auto-Generate Author + Date Here</div>
                     </Row>
@@ -69,7 +69,7 @@ const CreateRecipePage = () => {
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button>+</Button>
+                                    <Button className="plus-button">+</Button>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@ const CreateRecipePage = () => {
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button>+</Button>
+                                    <Button className="plus-button">+</Button>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +96,7 @@ const CreateRecipePage = () => {
                     <Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Prep Time</Form.Label>
+                            <div className="dropdown-btn-formatting">
                             <Row>
                                 <Col>
                                     <Dropdown>
@@ -123,11 +124,12 @@ const CreateRecipePage = () => {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Col>
-                            </Row>
+                            </Row></div>
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Label>Diet</Form.Label>
+                        <div style={{ paddingBottom: "15px" }}>
+                        <Form.Label >Diet</Form.Label>
                         {['checkbox'].map((type) => (
                             <div key={`inline-${type}`} className="mb-3">
                                 <Form.Check
@@ -153,9 +155,9 @@ const CreateRecipePage = () => {
                                 />
                             </div>
                         ))}
-
+                        </div>
                     </Row>
-                    <Button type="submit" onClick={HandleFormSubmit} >Submit</Button>
+                    <Button className="create-recipe-submitBtn" type="submit" onClick={HandleFormSubmit}>Submit</Button>
                 </Form>
             </div>
         </div>
