@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React,{useState} from 'react';
 import { Form, Card, Button } from 'react-bootstrap'
 import '../css/signIn.css';
@@ -7,8 +8,8 @@ const SignIn = () => {
     
     // Initial value assignment
     const [values, setValues] = useState({
-        signinUsername: "",
-        signinPassword: ""
+        username: "",
+        password: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -25,6 +26,10 @@ const SignIn = () => {
         event.preventDefault();
         // Validate user input
         setErrors(validationSignIn(values));
+
+        axios.post('http://localhost:8080/api/auth/signin', values)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     };
 
     return (
@@ -33,28 +38,28 @@ const SignIn = () => {
                 <Card.Body>
                     <Card.Title><h1 class="text-center ff-font">Sign In</h1></Card.Title>
                     <Form className="formStyling-signIn">
-                        <Form.Group controlId="signinUsername">
+                        <Form.Group controlId="username">
                             <Form.Label>Username</Form.Label>
                             <Form.Control 
                                 type="text" 
-                                name = "signinUsername"
+                                name = "username"
                                 placeholder="Enter username"
-                                value={values.signinUsername}
+                                value={values.username}
                                 onChange={HandleChange} 
                             />
-                            {errors.signinUsername && <p className="error">{errors.signinUsername}</p>}
+                            {errors.username && <p className="error">{errors.username}</p>}
                         </Form.Group>
 
-                        <Form.Group controlId="signinPassword" style={{ paddingTop: '20px' }}>
+                        <Form.Group controlId="password" style={{ paddingTop: '20px' }}>
                             <Form.Label>Password</Form.Label>
                             <Form.Control 
                                 type="password" 
-                                name = "signinPassword"
+                                name = "password"
                                 placeholder="Enter password" 
-                                value={values.signinPassword}
+                                value={values.password}
                                 onChange={HandleChange}
                             />
-                            {errors.signinPassword && <p className="error">{errors.signinPassword}</p>}
+                            {errors.password && <p className="error">{errors.password}</p>}
                         </Form.Group>
                         <div className="signIn-button-formatting">
                             <Button className="signIn-button-styling" variant="success" type="submit" onClick={HandleFormSubmit}>Sign In </Button>

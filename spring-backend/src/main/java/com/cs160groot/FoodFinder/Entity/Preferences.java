@@ -8,13 +8,21 @@ public class Preferences {
 	private ArrayList<String> restrictions;
 
 	public Preferences() {
-		// TODO Auto-generated constructor stub
+		ingredients = new ArrayList<>();
+		diet = new ArrayList<>();
+		restrictions = new ArrayList<>();
 	}
 	
 	public Preferences(ArrayList<String> ingredients, ArrayList<String> diet, ArrayList<String> restrictions) {
 		this.ingredients = ingredients;
 		this.diet = diet;
 		this.restrictions = restrictions;
+	}
+	
+	public Preferences(ArrayList<String> diet) {
+		this.ingredients = new ArrayList<>();
+		this.diet = diet;
+		this.restrictions = new ArrayList<>();
 	}
 	
 	public ArrayList<String> getIngredients() {
