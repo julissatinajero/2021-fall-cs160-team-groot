@@ -12,5 +12,6 @@ public interface RecipeRepository extends MongoRepository<Recipe, Integer> {
 	List<Optional<Recipe>> findByIngredientsIn(List<String> ingredients);
 	List<Optional<Recipe>> findByMenuIn(List<String> menu);
 	List<Optional<Recipe>> findByRestrictionsIn(List<String> restrictions);
+	List<Optional<Recipe>> findByNameIn(List<String> name);
 
 }
