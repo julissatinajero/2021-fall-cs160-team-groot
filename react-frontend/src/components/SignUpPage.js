@@ -1,5 +1,5 @@
+import axios from 'axios';
 import React,{useState} from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
 import '../css/SignUp.css';
 import {Button, Form, Card} from 'react-bootstrap';
 import validation from "./SignUpValidation"
@@ -30,6 +30,10 @@ const SignUpPage = () => {
         event.preventDefault();
         //Validating user input
         setErrors(validation(values));
+        axios.post('http://localhost:8080/api/auth/signup', values)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+
     };
 
     return (
