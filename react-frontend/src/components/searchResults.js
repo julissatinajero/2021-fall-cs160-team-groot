@@ -19,6 +19,7 @@ const SearchResults = () => {
     const [searchResults, setSearchResults] = useState([]); // Holds all matched filtered and search values
     const [restrictGenre, setRestrictGenre] = useState([]);
     const [filteredRestrictGenre, setFilteredRestrictGenre] = useState([]);
+    const [filterSearchOption, setFilterSearchOption] = useState("");
 
     /*
     useEffect() runs everytime application renders 
@@ -55,6 +56,13 @@ const SearchResults = () => {
     }, [restrictGenre])
 
     /*
+    filterSearchOption holds the filter option that user wants to search by 
+    */
+    const onFilteredSearch = e => {
+        setFilterSearchOption({id: e.target.id});
+    }
+
+    /*
     handleDietChange gets called on when user marks a diet checkbox
     handleDietChange sets the dietGenre to whatever diet the user has marked
     */
@@ -83,187 +91,6 @@ const SearchResults = () => {
     handleClick gets triggered when search bar button is clicked on
     */
     const handleClick = () => {
-        new_search();
-    }
-
-    /*
-    new_search sets recipe objects to searchResults, which eventually will be mapped for display. Works on 
-    the combination of filtering search input, diet checkbox, and restrictions checkbox 
-    */
-    const new_search = () => {
-        if (filteredData === "" && dietGenre.length === 0 && restrictGenre.length === 0) {
-            // Runs if user did not select any filters and left search bar empty
-            setSearchResults(dmmydata);
-        } else if (filteredData.length === 0 && restrictGenre.length === 0 && dietGenre.length > 0) {
-            // Runs if user only selected "diet" filters 
-            setSearchResults(filteredDietGenre);
-        } else if (filteredData.length === 0 && dietGenre.length === 0 && restrictGenre.length > 0) {
-            // Runs if user only selected "restrictions" filters
-            setSearchResults(filteredRestrictGenre);
-        } else if (restrictGenre.length > 0 && dietGenre.length > 0 && filteredData.length === 0) {
-            // Runs if there's a restrict checked and diet checked but no user input in search bar 
-            
-            // Temporary array that will hold matching recipe objects 
-            let restrictionsArray = [];
-
-            // Iterates through both the restrictions filter and diet filter. If recipes has both fields, push it
-            // to the restrictionsArray 
-            for (let i in filteredRestrictGenre) {
-                filteredDietGenre.map((val) => {
-                    if (val.recipe_name.toString().toLowerCase().includes(filteredRestrictGenre[i].recipe_name.toString().toLowerCase())) {
-                        restrictionsArray.push(val);
-                    }
-                })
-            }
-
-            // If the restrictionsArray doesn't have a length > 0, return -1 to print out "results not found"
-            // Else return the matching recipes
-            if (restrictionsArray.length > 0) {
-                setSearchResults(restrictionsArray);
-            } else {
-                setSearchResults(-1);
-            }
-
-            //setSearchResults(restrictionsArray);
-
-        } else if (restrictGenre.length === 0 && filteredData !== "" && dietGenre.length > 0) {
-            // Runs if user typed into search bar and selected diet filter
-            
-            // searchedValuesArray contains recipes that matched user input from search bar
-            let searchedValuesArray = []
-            searchedValuesArray = searchKeywords();
-
-            // matchedFilteredValues contains recipes from searchedValuesArray that matched the diet filter
-            let matchedFilteredValues = []
-
-            // Since there can be more than one checkbox checked, iterate through filteredDietGenre and find
-            // recipe matches 
-            for (let i in filteredDietGenre) {
-                searchedValuesArray.map((val) => {
-                    if (val.recipe_name.toString().toLowerCase().includes(filteredDietGenre[i].recipe_name.toString().toLowerCase())) {
-                        matchedFilteredValues.push(val);
-                    }
-                })
-            }
-
-            // If the matchedFilteredValues doesn't have a length > 0, return -1 to print out "results not found"
-            // Else return the matching recipes
-            if (matchedFilteredValues.length > 0) {
-                setSearchResults(matchedFilteredValues);
-            } else {
-                setSearchResults(-1);
-            }
-
-            //setSearchResults(matchedFilteredValues);
-        } else if (dietGenre.length === 0 && restrictGenre.length > 0 && filteredData !== "") {
-            // Runs if user typed into search bar and selected restrictions filter
-            
-            // searchedValuesArray contains recipes that matched user input from search bar
-            let searchedValuesArray = [];
-            searchedValuesArray = searchKeywords();
-
-            // matchedFilteredValues contains recipes from searchedValuesArray that matched the restrictions filter
-            let matchedFilteredValues = [];
-
-            // Since there can be more than one checkbox checked, iterate through filteredRestrictGenre and find
-            // recipe matches 
-            for (let i in filteredRestrictGenre) {
-                searchedValuesArray.map((val) => {
-                    if (val.recipe_name.toString().toLowerCase().includes(filteredRestrictGenre[i].recipe_name.toString().toLowerCase())) {
-                        matchedFilteredValues.push(val);
-                    }
-                })
-            }
-
-            // If the matchedFilteredValues doesn't have a length > 0, return -1 to print out "results not found"
-            // Else return the matching recipes
-            if (matchedFilteredValues.length > 0) {
-                setSearchResults(matchedFilteredValues);
-            } else {
-                setSearchResults(-1);
-            }
-
-            // setSearchResults(matchedFilteredValues);
-
-        } else if (dietGenre.length > 0 && restrictGenre.length > 0 && filteredData !== "") {
-            // Runs if the user typed in search bar and used both restrictions and diet filters 
-            
-            // searchedValuesArray contains recipes that matched user input from search bar
-            let searchedValuesArray = []
-            searchedValuesArray = searchKeywords();
-
-            // matchedRestrictValues contains recipes from searchedValuesArray that matched the restrictions filter
-            let matchedRestrictValues = []
-
-            // Since there can be more than one checkbox checked, iterate through filteredRestrictGenre and find
-            // recipe matches 
-            for (let i in filteredRestrictGenre) {
-                searchedValuesArray.map((val) => {
-                    if (val.recipe_name.toString().toLowerCase().includes(filteredRestrictGenre[i].recipe_name.toString().toLowerCase())) {
-                        matchedRestrictValues.push(val);
-                    }
-                })
-            }
-
-            // Now that we have recipes that match with user input and the restrictions filter, we need to lastly 
-            // check if the recipes we have, have the correct diet filters
-
-            // matchedDietValues contains recipes from matchedRestrictValues that matched the diet filter
-            let matchedDietValues = []
-
-            // Since there can be more than one checkbox checked, iterate through filteredDietGenre and find
-            // recipe matches and push matched recipe obejcts to matchedDietValues
-            for (let i in filteredDietGenre) {
-                searchedValuesArray.map((val) => {
-                    if (val.recipe_name.toString().toLowerCase().includes(filteredDietGenre[i].recipe_name.toString().toLowerCase())) {
-                        matchedDietValues.push(val);
-                    }
-                })
-            }
-
-            // If the matchedDietValues doesn't have a length > 0, return -1 to print out "results not found"
-            // Else return the matching recipes
-            if (matchedDietValues.length > 0) {
-                setSearchResults(matchedDietValues);
-            } else {
-                setSearchResults(-1);
-            }
-
-        } else if (filteredData !== "") {
-            // Runs if the user only typed in input to the search bar
-            
-            // Retrieve matching recipes from searchKeywords
-            let foundValues = [];
-            foundValues = searchKeywords();
-
-            // If the matchedDietValues doesn't have a length > 0, return -1 to print out "results not found"
-            // Else return the matching recipes
-            if (foundValues.length > 0) {
-                setSearchResults(foundValues);
-            } else {
-                setSearchResults(-1);
-            }
-        }
-    }
-
-    /*
-    searchKeywords only filters out recipes based on the user input provided from the searchbar. 
-    searchKeywords searches the recipes' fields of ingredients, recipe name, menu, and restrictions.
-    If the user's input matches any of the recipe's field's value, add to foundMatches array
-    */
-    const searchKeywords = () => {
-        let foundMatches = []
-
-        foundMatches = dmmydata.filter((val) => {
-            if (val.ingredients.toString().toLowerCase().includes(filteredData.toString().toLowerCase()) ||
-                (val.recipe_name.toLowerCase().includes(filteredData.toString().toLowerCase())) ||
-                (val.menu.toString().toLowerCase().includes(filteredData.toString().toLowerCase())) ||
-                (val.restrictions.toString().toLowerCase().includes(filteredData.toString().toLowerCase()))) {
-                return val;
-            }
-        })
-
-        return foundMatches;
     }
 
     // Grabbing user input from search and setting it to the filteredData hook
@@ -390,49 +217,70 @@ const SearchResults = () => {
                         <Card className="recipeResults">
                             <h1 className="searchTitle">Search Results</h1>
 
-                            <Row>
-                                {/* Whatever the user types in the search bar will be set in setData by onChange */}
-                                <Row>
-                                    <input
-                                        type="text"
-                                        className="searchBar py-1"
-                                        value={wordEntered}
-                                        onChange={setData}
-                                    />
-                                    {/* Filter through recipe database for matches when the button is clicked */}
-                                    <button className="buttonSearchResult col-1 py-1"
-                                        onClick={handleClick}>
-                                        <Link to="/search"><FontAwesomeIcon icon={faSearch} color="white" /></Link>
-                                    </button>
 
-                                </Row>
-                            </Row>
+                            {/* Whatever the user types in the search bar will be set in setData by onChange */}
                             <Row>
-                                {/* 
-                                Initially checks if any checkboxes have been marked or if any input has been 
-                                submitted, if none of these apply, display all recipe cards. In the case where
-                                they aren't, grab data from searchResults where we've set values from in new_search().
-                                Map through the data as recipe cards and display them. However, if searchResults = -1,
-                                this means that there are no matches, so simply notify user "Sorry cannot find recipes"
-                                 */}
+                                <input
+                                    type="text"
+                                    className="searchBar py-1"
+                                    value={wordEntered}
+                                    onChange={setData}
+                                />
+                                {/* Filter through recipe database for matches when the button is clicked */}
+                                <button className="buttonSearchResult col-1 py-1"
+                                    onClick={handleClick}>
+                                    <Link to="/search"><FontAwesomeIcon icon={faSearch} color="white" /></Link>
+                                </button>
+           
+                                <div className="py-2">
+                                    {['radio'].map((type) => (
+                                        <div key={`inline-${type}`} className="mb-3">
+                                            <Form.Check
+                                                inline
+                                                label="Recipe name"
+                                                name="searchGroup"
+                                                type={type}
+                                                id="recipeName"
+                                                onChange={onFilteredSearch}
+                                            />
+                                            <Form.Check
+                                                inline
+                                                label="Ingredients"
+                                                name="searchGroup"
+                                                type={type}
+                                                id="ingredients"
+                                                onChange={onFilteredSearch}
+                                            />
+                                            <Form.Check
+                                                inline
+                                                label="Diet"
+                                                name="searchGroup"
+                                                type={type}
+                                                id="diet"
+                                                onChange={onFilteredSearch}
+                                            />
+                                            <Form.Check
+                                                inline
+                                                label="Restriction"
+                                                name="searchGroup"
+                                                type={type}
+                                                id="restriction"
+                                                onChange={onFilteredSearch}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </Row>
+
+                            <Row>
                                 {
-                                    (filteredData.length === 0 && dietGenre.length === 0 && restrictGenre.length === 0) ?
-                                        (dmmydata.map((val, key) => {
-                                            return (
-                                                <Col xs={3} className="mb-2" key={key}>
-                                                    <RecipeCard data={val} />
-                                                </Col>
-                                            );
-                                        })) :
-                                        ((searchResults === -1) ?
-                                            (<p className="searchTitle text-center">Sorry cannot find recipes :(</p>) :
-                                            (searchResults.map((val, key) => {
-                                                return (
-                                                    <Col xs={3} className="mb-2" key={key}>
-                                                        <RecipeCard data={val} />
-                                                    </Col>
-                                                );
-                                            })))
+                                    (dmmydata.map((val, key) => {
+                                        return (
+                                            <Col xs={3} className="mb-2" key={key}>
+                                                <RecipeCard data={val} />
+                                            </Col>
+                                        );
+                                    }))
                                 }
                             </Row>
                         </Card>
