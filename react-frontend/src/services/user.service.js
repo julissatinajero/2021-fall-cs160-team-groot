@@ -1,21 +1,36 @@
 import http from "../http-common";
 
 class UserDataService {
-    post(data){
-        return http.post("/users", data);
+
+    // @POST
+    postSignup(data){
+        return http.post("/auth/signup", data);
     }
 
-    get(id){
+    // @GET
+    getUser(id){
         return http.get(`/users/${id}`);
     }
 
-    // Below are untested, use at your own risk
+    getPreferences(id){
+        return http.get(`/users/preferences/${id}`);
+    }
+
+    getFavorites(id){
+        return http.get(`/users/favorites/${id}`);
+    }
+
+    getUploads(id){
+        return http.get(`/users/uploads/${id}`);
+    }
+
+    /**
     put(id, data){
         return http.put(`/users/${id}`, data);
     }
 
     delete(id){
         return http.delete(`/users/${id}`);
-    }
+    }*/
 }
 export default new UserDataService();
