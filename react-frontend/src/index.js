@@ -10,6 +10,7 @@ import SearchResults from './components/searchResults';
 import SignIn from './components/signIn';
 import SignUpPage from './components/SignUpPage';
 import reportWebVitals from './reportWebVitals';
+import CreateRecipePage from './components/CreateRecipe';
 import ProfilePage from './components/profile';
 import DisplayPage from './components/DisplayPage';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
           <Route path="/search" component={SearchResults}/>
           <Route path="/sign-up" component={SignUpPage}/>
           <Route path="/sign-in" component={SignIn}/>
+          <Route path="/create" component={CreateRecipePage}/>
           <Route path="/profile/:id" component={ProfilePage}/>
           <Route path="/profile" component={ProfilePage}/>
           <Route path="/" component={HomeMasthead}/>
