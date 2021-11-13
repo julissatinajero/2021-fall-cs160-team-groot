@@ -23,6 +23,7 @@ ReactDOM.render(
           <Route path="/sign-up" component={SignUpPage}/>
           <Route path="/sign-in" component={SignIn}/>
           <Route path="/create" component={CreateRecipePage}/>
+          <Route path="/profile/:id" component={ProfilePage}/>
           <Route path="/profile" component={ProfilePage}/>
           <Route path="/" component={HomeMasthead}/>
       </Switch>

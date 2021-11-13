@@ -1,7 +1,10 @@
+import axios from 'axios';
 import React,{useState} from 'react';
 import '../css/SignUp.css';
 import {Button, Form, Card} from 'react-bootstrap';
 import validation from "./SignUpValidation"
+
+import UserDataService from '../services/user.service';
 
 const SignUpPage = () => {
     //Assigning initial values of each variable
@@ -29,6 +32,23 @@ const SignUpPage = () => {
         event.preventDefault();
         //Validating user input
         setErrors(validation(values));
+        // Submit the request to the backend
+        UserDataService.postSignup(values).then(
+            (response) => {
+                console.log(response.data);
+            }
+        ).catch(
+            (e) => {
+                console.log(e);
+            }
+        );
+        /**
+         * Example from the authentication branch
+         * axios.post('http://localhost:8080/api/auth/signup', values)
+         * .then(res => console.log(res))
+         * .catch(err => console.log(err));
+         * */
+
     };
 
     return (
