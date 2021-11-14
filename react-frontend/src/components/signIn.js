@@ -4,9 +4,7 @@ import { Form, Card, Button } from 'react-bootstrap'
 import '../css/signIn.css';
 import validationSignIn from "./signInValidation"
 
-const SignIn = () => {
-    
-    // Initial value assignment
+const SignIn = (props) => {
     const [values, setValues] = useState({
         username: "",
         password: ""
@@ -28,7 +26,15 @@ const SignIn = () => {
         setErrors(validationSignIn(values));
 
         axios.post('http://localhost:8080/api/auth/signin', values)
-        .then(res => console.log(res))
+        // If promise is fullfilled, redirect to profile page and output data on console
+        .then(res => {
+            // status code 200 indicates a successful sign in 
+            if (res.status === 200) {
+                props.history.push("/profile");
+            }
+            console.log(res)
+        })
+        // If promise is rejected, output error message on console
         .catch(err => console.log(err));
     };
 
