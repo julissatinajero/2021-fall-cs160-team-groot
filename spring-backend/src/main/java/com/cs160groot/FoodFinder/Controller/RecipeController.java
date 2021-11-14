@@ -124,7 +124,7 @@ public class RecipeController {
 	 * Example: localhost:8080/api/recipe/favorite/userID=1/recipeID=4
 	 */
 	@GetMapping("/favorite/userID={userID}/recipeID={recipeID}")
-	public AppUser favoriteRecipe(@PathVariable int userID, @PathVariable int recipeID) throws Exception
+	public AppUser favoriteRecipe(@PathVariable String userID, @PathVariable int recipeID) throws Exception
 	{
 		AppUser user = appUserRepository.findById(userID)
 				.orElseThrow(()-> new Exception("User with id: "+userID+" not found."));
