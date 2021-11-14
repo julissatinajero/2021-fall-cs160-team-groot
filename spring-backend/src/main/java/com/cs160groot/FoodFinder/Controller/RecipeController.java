@@ -1,7 +1,7 @@
 package com.cs160groot.FoodFinder.Controller;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +41,69 @@ public class RecipeController {
 		this.recipeRepository = recipeRepository;
 		this.appUserRepository = appUserRepository;
 		this.mongoTemplate = mongoTemplate;
+		
+		List<String> ingredients1 = Arrays.asList("tomato","cucumber","lettuce","carrot","salad dressing", "salt","pepper");
+		List<String> menu1 = Arrays.asList("Vegetarian","Vegan");
+		List<String> restrictions1 = Arrays.asList("gluten-free","peanut-free");
+		Recipe r1 = new Recipe(0,"Fresh Salad",100,ingredients1,
+				"Mix vegetables in a large bowl, top with salad dressing, and serve.",menu1,restrictions1,100,10);
+		
+		
+		List<String> ingredients2 = Arrays.asList("bean","cheese","tortilla");
+		List<String> menu2 = Arrays.asList("Vegetarian");
+		List<String> restrictions2 = Arrays.asList("gluten-free","peanut-free");
+		Recipe r2 = new Recipe(2,"Bean Burrito",100,ingredients2,
+				"Wrap baked beans and cheese in tortilla and serve.",menu2,restrictions2,200,20);
+		
+		List<String> ingredients3 = Arrays.asList("fish", "tortilla","bean","cheese","lettuce","tomato");
+		List<String> menu3 = Arrays.asList("Pescatarian");
+		List<String> restrictions3 = Arrays.asList("gluten-free","peanut-free");
+		Recipe r3 = new Recipe(4,"Fish Taco",200,ingredients3,
+				"Prepare fish. Wrap all ingredients in tortilla and serve.",menu3,restrictions3,300,30);
+		
+		
+		List<String> ingredients4 = Arrays.asList("orange","banana","apple","grape");
+		List<String> menu4 = Arrays.asList("Vegetarian","Vegan");
+		List<String> restrictions4 = Arrays.asList("gluten-free","peanut-free","fat-free");
+		Recipe r4 = new Recipe(1,"Fruit Salad",300,ingredients4,
+				"Mix fruits in bowl and serve.",menu4,restrictions4,100,10);
+		
+		List<String> ingredients5 = Arrays.asList("fish", "flour","spice");
+		List<String> menu5 = Arrays.asList("Pescatarian");
+		List<String> restrictions5 = Arrays.asList("peanut-free");
+		Recipe r5 = new Recipe(3,"Fish Sticks",300,ingredients5,
+				"Coat fish in flour and spice mixture, fry, and serve.",menu5,restrictions5,300,60);
+		
+		List<String> ingredients6 = Arrays.asList("potato","chives","salt","pepper","oregano", "olive oil");
+		List<String> menu6 = Arrays.asList("Vegetarian","Vegan");
+		List<String> restrictions6 = Arrays.asList("gluten-free","peanut-free");
+		Recipe r6 = new Recipe(6,"Herb-Roasted Potatoes",200,ingredients6,
+				"Roast potatoes in olive oil and mix with herbs. Serve.",menu6,restrictions6,500,30);
+		
+		
+		List<String> ingredients7 = Arrays.asList("noodle","soy sauce","peanut","thai chili");
+		List<String> menu7 = Arrays.asList("Vegetarian","Vegan");
+		List<String> restrictions7 = Arrays.asList("gluten-free");
+		Recipe r7 = new Recipe(5,"Chow Mein",400,ingredients7,
+				"Soak noodles for 20 minutes, drain, and let dry. Sautee with soy sauce, peanuts, and chilis. Serve.",menu7,restrictions7,500,30);
+		
+		List<String> ingredients8 = Arrays.asList("cauliflower", "dough", "tomato", "mushroom", "cheese");
+		List<String> menu8 = Arrays.asList("Vegetarian");
+		List<String> restrictions8 = Arrays.asList("peanut-free");
+		Recipe r8 = new Recipe(9,"Cauliflower Crust Pizza",400,ingredients8,
+				"Create pizza crust and base using chopped cauliflower and top with cheese, tomato, and mushrooms. Bake for an hour. Serve. ",menu8,restrictions8,1000,60);
+		
+		
+		recipeRepository.save(r1);
+		recipeRepository.save(r2);
+		recipeRepository.save(r3);
+		recipeRepository.save(r4);
+		recipeRepository.save(r5);
+		recipeRepository.save(r6);
+		recipeRepository.save(r7);
+		recipeRepository.save(r8);
+		
+		
 	}
 	
 	// API to create a recipe and save to database
@@ -145,6 +208,9 @@ public class RecipeController {
 	{
 		return recipeRepository.findByNameIn(name);
 	}
+	
+	
+	
 	
 	
 	
