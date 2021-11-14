@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/createRecipe.css';
 import {Button, Form, Row, Col, Dropdown } from 'react-bootstrap';
+import validationCreateRecipe from "./createRecipeValidation"
 
 const CreateRecipePage = () => {
     const [values, setValues] = useState({
@@ -8,7 +9,9 @@ const CreateRecipePage = () => {
         recipeDescription: "",
         instructions: "",
         ingredients: ""
+        //TO-DO: add prep time and diet/menu
     });
+    const [errors, setErrors] = useState({});
 
     const HandleChange = (event) => {
         //Sets the value for each input field
@@ -22,7 +25,19 @@ const CreateRecipePage = () => {
 
     const HandleFormSubmit = (event) => {
         event.preventDefault();
+        setErrors(validationCreateRecipe(values));
         //Validating user input
+        // setErrors(validation(values));
+        // // Submit the request to the backend
+        // UserDataService.postSignup(values).then(
+        //     (response) => {
+        //         console.log(response.data);
+        //     }
+        // ).catch(
+        //     (e) => {
+        //         console.log(e);
+        //     }
+        // );
     };
 
     return (
@@ -42,6 +57,7 @@ const CreateRecipePage = () => {
                                 value={values.recipeTitle}
                                 onChange={HandleChange}
                             />
+                            {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
@@ -53,6 +69,7 @@ const CreateRecipePage = () => {
                                 value={values.recipeDescription}
                                 onChange={HandleChange}
                             />
+                            {errors.recipeDescription && <p className="error">{errors.recipeDescription}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
@@ -64,7 +81,9 @@ const CreateRecipePage = () => {
                                     name="instructions"
                                     value={values.instructions}
                                     onChange={HandleChange}
-                                /> </Form.Group>
+                                /> 
+                                {errors.instructions && <p className="error">{errors.instructions}</p>}
+                            </Form.Group>
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
@@ -83,7 +102,9 @@ const CreateRecipePage = () => {
                                     name="ingredients"
                                     value={values.ingredients}
                                     onChange={HandleChange}
-                                /> </Form.Group>
+                                /> 
+                                {errors.ingredients && <p className="error">{errors.ingredients}</p>}
+                                </Form.Group>
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
