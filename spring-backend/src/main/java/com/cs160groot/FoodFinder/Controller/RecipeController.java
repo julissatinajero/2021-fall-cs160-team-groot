@@ -45,53 +45,61 @@ public class RecipeController {
 		List<String> ingredients1 = Arrays.asList("tomato","cucumber","lettuce","carrot","salad dressing", "salt","pepper");
 		List<String> menu1 = Arrays.asList("Vegetarian","Vegan");
 		List<String> restrictions1 = Arrays.asList("gluten-free","peanut-free");
+		List<String> directions1 = Arrays.asList("Mix vegetables in a large bowl.","Top with salad dressing of choice.","Serve.");
 		Recipe r1 = new Recipe(0,"Fresh Salad",100,ingredients1,
-				"Mix vegetables in a large bowl, top with salad dressing, and serve.",menu1,restrictions1,100,10);
+				directions1,menu1,restrictions1,100,10);
 		
 		
 		List<String> ingredients2 = Arrays.asList("bean","cheese","tortilla");
 		List<String> menu2 = Arrays.asList("Vegetarian");
 		List<String> restrictions2 = Arrays.asList("gluten-free","peanut-free");
+		List<String> directions2 = Arrays.asList("Warm tortilla.","Bake beans.","Wrap beans and cheese in tortilla.","Serve.");
 		Recipe r2 = new Recipe(2,"Bean Burrito",100,ingredients2,
-				"Wrap baked beans and cheese in tortilla and serve.",menu2,restrictions2,200,20);
+				directions2,menu2,restrictions2,200,20);
 		
 		List<String> ingredients3 = Arrays.asList("fish", "tortilla","bean","cheese","lettuce","tomato");
 		List<String> menu3 = Arrays.asList("Pescatarian");
 		List<String> restrictions3 = Arrays.asList("gluten-free","peanut-free");
+		List<String> directions3 = Arrays.asList("Prepare fish.","Warm tortilla.","Wrap ingredients in tortilla.","Serve.");
 		Recipe r3 = new Recipe(4,"Fish Taco",200,ingredients3,
-				"Prepare fish. Wrap all ingredients in tortilla and serve.",menu3,restrictions3,300,30);
+				directions3,menu3,restrictions3,300,30);
 		
 		
 		List<String> ingredients4 = Arrays.asList("orange","banana","apple","grape");
 		List<String> menu4 = Arrays.asList("Vegetarian","Vegan");
 		List<String> restrictions4 = Arrays.asList("gluten-free","peanut-free","fat-free");
+		List<String> directions4 = Arrays.asList("Dice the fruits.","Mix fruits in a large bowl.","Serve.");
 		Recipe r4 = new Recipe(1,"Fruit Salad",300,ingredients4,
-				"Mix fruits in bowl and serve.",menu4,restrictions4,100,10);
+				directions4,menu4,restrictions4,100,10);
 		
 		List<String> ingredients5 = Arrays.asList("fish", "flour","spice");
 		List<String> menu5 = Arrays.asList("Pescatarian");
 		List<String> restrictions5 = Arrays.asList("peanut-free");
+		List<String> directions5 = Arrays.asList("Coat fish in flour and spice mixture.","Fry fish.","Serve.");
 		Recipe r5 = new Recipe(3,"Fish Sticks",300,ingredients5,
-				"Coat fish in flour and spice mixture, fry, and serve.",menu5,restrictions5,300,60);
+				directions5,menu5,restrictions5,300,60);
 		
 		List<String> ingredients6 = Arrays.asList("potato","chives","salt","pepper","oregano", "olive oil");
 		List<String> menu6 = Arrays.asList("Vegetarian","Vegan");
 		List<String> restrictions6 = Arrays.asList("gluten-free","peanut-free");
+		List<String> directions6 = Arrays.asList("Roast potatoes in olive oil over low heat.","Coat with herbs and mix.","Serve.");
 		Recipe r6 = new Recipe(6,"Herb-Roasted Potatoes",200,ingredients6,
-				"Roast potatoes in olive oil and mix with herbs. Serve.",menu6,restrictions6,500,30);
+				directions6,menu6,restrictions6,500,30);
 		
 		
 		List<String> ingredients7 = Arrays.asList("noodle","soy sauce","peanut","thai chili");
 		List<String> menu7 = Arrays.asList("Vegetarian","Vegan");
 		List<String> restrictions7 = Arrays.asList("gluten-free");
+		List<String> directions7 = Arrays.asList("Soak noodles for 20 minutes.","Drain noodles and let sit for 10 minutes.","Sautee noodles with soy sauce, peanuts, and thai chilis.","Serve.");
 		Recipe r7 = new Recipe(5,"Chow Mein",400,ingredients7,
-				"Soak noodles for 20 minutes, drain, and let dry. Sautee with soy sauce, peanuts, and chilis. Serve.",menu7,restrictions7,500,30);
+				directions7,menu7,restrictions7,500,30);
 		
 		List<String> ingredients8 = Arrays.asList("cauliflower", "dough", "tomato", "mushroom", "cheese");
 		List<String> menu8 = Arrays.asList("Vegetarian");
 		List<String> restrictions8 = Arrays.asList("peanut-free");
+		List<String> directions8 = Arrays.asList("Finely chop cauliflower.","Create pizza crust and base using chopped cauliflower.","Top with cheese, tomato, and mushrooms.","Bake for an hour.","Serve.");
 		Recipe r8 = new Recipe(9,"Cauliflower Crust Pizza",400,ingredients8,
-				"Create pizza crust and base using chopped cauliflower and top with cheese, tomato, and mushrooms. Bake for an hour. Serve. ",menu8,restrictions8,1000,60);
+				directions8,menu8,restrictions8,1000,60);
 		
 		
 		recipeRepository.save(r1);
