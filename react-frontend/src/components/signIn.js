@@ -36,7 +36,7 @@ const SignIn = () => {
         <div className="outer-container-signIn">
             <Card style={{ width: "45%" }}>
                 <Card.Body>
-                    <Card.Title><h1 class="text-center ff-font">Sign In</h1></Card.Title>
+                    <Card.Title><h1 className="text-center ff-font">Sign In</h1></Card.Title>
                     <Form className="formStyling-signIn">
                         <Form.Group controlId="username">
                             <Form.Label>Username</Form.Label>

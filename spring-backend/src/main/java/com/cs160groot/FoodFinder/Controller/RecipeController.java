@@ -123,19 +123,28 @@ public class RecipeController {
 	/* API to let a user favorite a recipe and have the recipe added to their list of favorites
 	 * Example: localhost:8080/api/recipe/favorite/userID=1/recipeID=4
 	 */
-	@PutMapping("/favorite/userID={userID}/recipeID={recipeID}")
+	@GetMapping("/favorite/userID={userID}/recipeID={recipeID}")
 	public AppUser favoriteRecipe(@PathVariable int userID, @PathVariable int recipeID) throws Exception
 	{
 		AppUser user = appUserRepository.findById(userID)
 				.orElseThrow(()-> new Exception("User with id: "+userID+" not found."));
 		ArrayList<Integer> favorites = new ArrayList<>();
-		favorites = user.getUploaded();
+		favorites = user.getFavorited();
 		favorites.add(recipeID);
 		user.setFavorited(favorites);
 		return appUserRepository.save(user);
+		
+		
 	}
 	
-	
+	/* API to retrieve a list of recipes by providing one or more recipe names
+	 * Example: localhost:8080/api/recipe/names?name=pasta,salad,fries
+	 */
+	@GetMapping("/names")
+	public List<Optional<Recipe>> getRecipesByNames(@RequestParam List<String> name)
+	{
+		return recipeRepository.findByNameIn(name);
+	}
 	
 	
 	
