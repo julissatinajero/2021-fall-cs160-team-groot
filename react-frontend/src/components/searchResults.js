@@ -9,6 +9,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import dmmydata from '../dummyData';    // Delete this import of the json file later
 import RecipeCard from './recipeCard';
 
+import RecipeService from '../services/recipe.service';
+
 const SearchResults = () => {
     const [filteredData, setFilteredData] = useState([]); // Holds input that user typed into search bar 
     const [wordEntered, setWordEntered] = useState(""); // Hook that determines if search bar is empty or not 
@@ -20,6 +22,7 @@ const SearchResults = () => {
     const [restrictGenre, setRestrictGenre] = useState([]);
     const [filteredRestrictGenre, setFilteredRestrictGenre] = useState([]);
     const [filterSearchOption, setFilterSearchOption] = useState("");
+    const [searchTester, setSearchTester] = useState([]);
 
     /*
     useEffect() runs everytime application renders 
@@ -59,7 +62,7 @@ const SearchResults = () => {
     filterSearchOption holds the filter option that user wants to search by 
     */
     const onFilteredSearch = e => {
-        setFilterSearchOption({id: e.target.id});
+        setFilterSearchOption({ id: e.target.id });
     }
 
     /*
@@ -91,6 +94,13 @@ const SearchResults = () => {
     handleClick gets triggered when search bar button is clicked on
     */
     const handleClick = () => {
+        RecipeService.getAllRecipes()
+            .then((response) => {
+                console.log(response);
+            }).catch((e) => {
+                console.log(e);
+            }
+            )
     }
 
     // Grabbing user input from search and setting it to the filteredData hook
@@ -231,7 +241,7 @@ const SearchResults = () => {
                                     onClick={handleClick}>
                                     <Link to="/search"><FontAwesomeIcon icon={faSearch} color="white" /></Link>
                                 </button>
-           
+
                                 <div className="py-2">
                                     {['radio'].map((type) => (
                                         <div key={`inline-${type}`} className="mb-3">
@@ -274,7 +284,15 @@ const SearchResults = () => {
 
                             <Row>
                                 {
-                                    (dmmydata.map((val, key) => {
+                                    /* (dmmydata.map((val, key) => {
+                                        return (
+                                            <Col xs={3} className="mb-2" key={key}>
+                                                <RecipeCard data={val} />
+                                            </Col>
+                                        );
+                                    })) */
+
+                                    (searchTester.map((val, key) => {
                                         return (
                                             <Col xs={3} className="mb-2" key={key}>
                                                 <RecipeCard data={val} />
