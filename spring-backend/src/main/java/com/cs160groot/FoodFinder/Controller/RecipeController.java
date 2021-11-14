@@ -217,6 +217,37 @@ public class RecipeController {
 		return recipeRepository.findByNameIn(name);
 	}
 	
+	/* API to retrieve a list of recipes by providing info from multiple categories
+	 * Example: localhost:8080/api/recipe/search?name=pasta%menu=vegan%restriction=peanut-free,fat-free
+	 * If you want to leave one of the categories empty, format like this: Ex (to leave name empty): http://localhost:8080/api/recipe/search?name=&menu=veggie,vegan&restriction=soy-free,gluten-free
+	 */
+	@GetMapping("/search")
+	public List<Recipe> search(@RequestParam List<String> name, @RequestParam List<String> menu, @RequestParam List<String> restriction)
+	{
+		
+		Query query = new Query();
+		List<Criteria> recipeCriteria = new ArrayList<>();
+		if (!name.isEmpty())
+		{
+		recipeCriteria.add(Criteria.where("name").in(name));
+		}
+		if (!menu.isEmpty())
+		{
+		recipeCriteria.add(Criteria.where("menu").is(menu));
+		}
+		if (!restriction.isEmpty())
+		{
+		recipeCriteria.add(Criteria.where("restrictions").is(restriction));
+		}
+		query.addCriteria(new Criteria().andOperator(recipeCriteria.toArray(new Criteria[recipeCriteria.size()])));
+		List<Recipe> result = mongoTemplate.find(query, Recipe.class);
+		return result;
+		
+		
+	}
+	
+	
+	
 	
 	
 	
