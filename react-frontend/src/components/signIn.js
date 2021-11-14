@@ -28,8 +28,13 @@ const SignIn = () => {
         setErrors(validationSignIn(values));
 
         axios.post('http://localhost:8080/api/auth/signin', values)
-        .then(res => console.log(res))
+        .then(res => {
+            window.localStorage.setItem("jwt", res.data.jwt);
+            window.localStorage.setItem("userID", res.data.userID);
+            console.log(res);
+        })
         .catch(err => console.log(err));
+
     };
 
     return (
