@@ -28,15 +28,20 @@ const SignIn = () => {
         setErrors(validationSignIn(values));
 
         axios.post('http://localhost:8080/api/auth/signin', values)
-        .then(res => console.log(res))
+        .then(res => {
+            window.localStorage.setItem("jwt", res.data.jwt);
+            window.localStorage.setItem("userID", res.data.userID);
+            console.log(res);
+        })
         .catch(err => console.log(err));
+
     };
 
     return (
         <div className="outer-container-signIn">
             <Card style={{ width: "45%" }}>
                 <Card.Body>
-                    <Card.Title><h1 class="text-center ff-font">Sign In</h1></Card.Title>
+                    <Card.Title><h1 className="text-center ff-font">Sign In</h1></Card.Title>
                     <Form className="formStyling-signIn">
                         <Form.Group controlId="username">
                             <Form.Label>Username</Form.Label>

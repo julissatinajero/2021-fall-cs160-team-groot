@@ -17,6 +17,7 @@ import com.cs160groot.FoodFinder.Repository.AppUserRepository;
 import com.cs160groot.FoodFinder.Security.AuthenticationRequest;
 import com.cs160groot.FoodFinder.Security.AuthenticationResponse;
 import com.cs160groot.FoodFinder.Security.JWTUtil;
+import com.cs160groot.FoodFinder.Security.UserDetailsImpl;
 import com.cs160groot.FoodFinder.Security.UserDetailsServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -58,9 +59,9 @@ public class AuthenticationController {
 		} catch(BadCredentialsException e) {
 			throw new Exception("Incorrect username or password", e);
 		}
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		final UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String jwt = jwtUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUserID()));
 	}	
 	
 	@GetMapping
