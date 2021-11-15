@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React,{useState} from 'react';
-import { Form, Card, Button } from 'react-bootstrap'
+import { Form, Card, Button, Row, Col } from 'react-bootstrap'
 import '../css/signIn.css';
 import validationSignIn from "./signInValidation"
 
@@ -26,16 +26,17 @@ const SignIn = (props) => {
         setErrors(validationSignIn(values));
 
         axios.post('http://localhost:8080/api/auth/signin', values)
-        // If promise is fullfilled, redirect to profile page and output data on console
-        .then(res => {
-            // status code 200 indicates a successful sign in 
-            if (res.status === 200) {
-                props.history.push("/profile");
-            }
+        // If promise is fullfilled (status code 200), redirect to profile page and output data on console
+        .then(res => { 
+            props.history.push("/profile");
             console.log(res)
         })
         // If promise is rejected, output error message on console
         .catch(err => console.log(err));
+    };
+
+    const returnHome = () => {
+         props.history.push("/");
     };
 
     return (
@@ -67,9 +68,17 @@ const SignIn = (props) => {
                             />
                             {errors.password && <p className="error">{errors.password}</p>}
                         </Form.Group>
+                        <Row>
+                            <Col>
                         <div className="signIn-button-formatting">
                             <Button className="signIn-button-styling" variant="success" type="submit" onClick={HandleFormSubmit}>Sign In </Button>
+                        </div></Col>
+                        <Col>
+                        <div className="signIn-button-formatting">
+                            <Button className="signIn-button-styling" onClick={returnHome}>Return</Button>
                         </div>
+                        </Col>
+                        </Row>
                     </Form>
                 </Card.Body>
             </Card>
