@@ -11,10 +11,10 @@ const CreateRecipePage = () => {
         recipeID: "", // Need to figure out a way to generate this
         name: "", 
         authorID: "",
-        ingredients: [], // Diabled until I figure out how to add to the list
-        directions: "", //aka Instructions
-        menu: [], // aka Diet; // Diabled until I figure out how to add to the list
-        restrictions: [], // Diabled until I figure out how to add to the list
+        ingredients: [], // Disabled until I figure out how to add to the list
+        directions: [], //aka Instructions; Disabled until I figure out how to add to the list
+        menu: [], // aka Diet; // Disabled until I figure out how to add to the list
+        restrictions: [], // Disabled until I figure out how to add to the list
         calorieCount: "",
         prepTime: ""
     });
