@@ -108,20 +108,25 @@ const SearchResults = () => {
     /*
     handleClick gets triggered when search bar button is clicked on
     */
-    const handleClick = () => {
+    const handleClick = async () => {
         console.log(filterSearchOption.id);
         if (filterSearchOption.id === 'recipeName') {
             const params = {
-                name: "Sushi"
+                name: ["Sushi"]
             }
 
-            RecipeService.getRecipeByName(params)
+            const res = await axios.get('http://localhost:8080/api/recipe/names', {params: {name: "Sushi"}});
+
+            console.log(res.data);
+
+            /*
+            RecipeService.getRecipeByName(params.name)
             .then((response) => {
                 setSearchResults(response.data);
             })
             .catch((e) => {
                 console.log(e);
-            }) 
+            }) */
 
         } else if (filterSearchOption.id === 'ingredients') {
             const params = {
