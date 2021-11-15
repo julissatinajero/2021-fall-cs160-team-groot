@@ -10,6 +10,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import dmmydata from '../dummyData';    // Delete this import of the json file later
 import RecipeCard from './recipeCard';
+import UserDataService from "../services/user.service";
 
 import RecipeService from '../services/recipe.service';
 
@@ -146,10 +147,10 @@ const SearchResults = () => {
     return (
         <div>
             <div className="outer-container">
-                <Row class="justify-content-md-center">
-                    <div class="col-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">
+                <Row className="justify-content-md-center">
+                    <div className="col-3">
+                        <ul className="list-group">
+                            <li className="list-group-item">
                                 <Form.Label className="labelTitles">Ingredients</Form.Label>
                                 {['checkbox'].map((type) => (
                                     <div key={`inline-${type}`} className="mb-3">
