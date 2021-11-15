@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
 import '../css/createRecipe.css';
-import {Button, Form, Row, Col, Dropdown } from 'react-bootstrap';
-//import validationCreateRecipe from "./createRecipeValidation"
+import {Button, Form, Row,} from 'react-bootstrap';
+import validationCreateRecipe from "./createRecipeValidation"
 
 import RecipeDataService from '../services/recipe.services';
 
+
 const CreateRecipePage = () => {
     const [values, setValues] = useState({
-        // recipeTitle: "",
-        // recipeDescription: "",
-        // instructions: "",
-        // ingredients: ""
-        //TO-DO: add prep time and diet/menu
         recipeID: "", // Need to figure out a way to generate this
         name: "", 
         authorID: "",
-        ingredients: [],
-        directions: "", //aka instructions
-        menu: [], // aka Diet
-        restrictions: [],
+        ingredients: [], // Diabled until I figure out how to add to the list
+        directions: "", //aka Instructions
+        menu: [], // aka Diet; // Diabled until I figure out how to add to the list
+        restrictions: [], // Diabled until I figure out how to add to the list
         calorieCount: "",
         prepTime: ""
     });
@@ -36,9 +32,8 @@ const CreateRecipePage = () => {
 
     const HandleFormSubmit = (event) => {
         event.preventDefault();
-        //setErrors(validationCreateRecipe(values));
         //Validating user input
-        // setErrors(validation(values));
+        setErrors(validationCreateRecipe(values));
 
         // Submit the request to the backend
         RecipeDataService.postRecipe(values).then(
@@ -64,24 +59,26 @@ const CreateRecipePage = () => {
                         <Form.Group className="mb-3" controlId="recipeID">
                             <Form.Label>Recipe ID</Form.Label>
                             <Form.Control
+                                type="number"
                                 placeholder="Type in a number"
                                 name="recipeID"
                                 value={values.recipeID}
                                 onChange={HandleChange}
                             />
-                            {/* {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>} */}
+                            {errors.recipeID && <p className="error">{errors.recipeID}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group className="mb-3" controlId="authorID">
                             <Form.Label>Author ID</Form.Label>
                             <Form.Control
+                                type="number"
                                 placeholder="Type in a number"
                                 name="authorID"
                                 value={values.authorID}
                                 onChange={HandleChange}
                             />
-                            {/* {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>} */}
+                            {errors.authorID && <p className="error">{errors.authorID}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
@@ -93,38 +90,26 @@ const CreateRecipePage = () => {
                                 value={values.name}
                                 onChange={HandleChange}
                             />
-                            {/* {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>} */}
+                            {errors.name && <p className="error">{errors.name}</p>}
                         </Form.Group>
                     </Row>
-                    {/* <Row>
-                        <Form.Group className="mb-3" controlId="recipeDescription">
-                            <Form.Label>Brief Description</Form.Label>
-                            <Form.Control
-                                placeholder="Description"
-                                name="recipeDescription"
-                                value={values.recipeDescription}
-                                onChange={HandleChange}
-                            />
-                            {errors.recipeDescription && <p className="error">{errors.recipeDescription}</p>}
-                        </Form.Group>
-                    </Row> */}
                     <Row>
                         <div class="col-10">
                             <Form.Group className="mb-3" controlId="directions">
                                 <Form.Label>List the instructions</Form.Label>
                                 <Form.Control
-                                    placeholder="Instruction"
-                                    name="directions"
-                                    value={values.directions}
-                                    onChange={HandleChange}
+                                    //placeholder="Instruction"
+                                    //name="directions"
+                                    // value={values.directions}
+                                    // onChange={HandleChange}
+                                    plaintext readOnly defaultValue="Can not include at the moment"
                                 /> 
-                                {/* {errors.instructions && <p className="error">{errors.instructions}</p>} */}
                             </Form.Group>
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button className="plus-button">+</Button>
+                                    <Button className="plus-button">Add</Button>
                                 </div>
                             </div>
                         </div>
@@ -134,18 +119,18 @@ const CreateRecipePage = () => {
                             <Form.Group className="mb-3" controlId="ingredients">
                                 <Form.Label>List the ingredients</Form.Label>
                                 <Form.Control
-                                    placeholder="Ingredient"
-                                    name="ingredients"
-                                    value={values.ingredients}
-                                    onChange={HandleChange}
+                                    //placeholder="Ingredient"
+                                    //name="ingredients"
+                                    //value={values.ingredients}
+                                    //onChange={HandleChange}
+                                    plaintext readOnly defaultValue="Can not include at the moment"
                                 /> 
-                                {/* {errors.ingredients && <p className="error">{errors.ingredients}</p>} */}
                                 </Form.Group>
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button className="plus-button">+</Button>
+                                    <Button className="plus-button">Add</Button>
                                 </div>
                             </div>
                         </div>
@@ -154,24 +139,26 @@ const CreateRecipePage = () => {
                         <Form.Group className="mb-3" controlId="prepTime">
                             <Form.Label>Prep Time In Minutes</Form.Label>
                             <Form.Control
+                                type="number"
                                 placeholder="Minutes"
                                 name="prepTime"
                                 value={values.prepTime}
                                 onChange={HandleChange}
                             />
-                            {/* {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>} */}
+                            {errors.prepTime && <p className="error">{errors.prepTime}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group className="mb-3" controlId="calorieCount">
                             <Form.Label>Calorie Count</Form.Label>
                             <Form.Control
+                                type="number"
                                 placeholder="Calories"
                                 name="calorieCount"
                                 value={values.calorieCount}
                                 onChange={HandleChange}
                             />
-                            {/* {errors.recipeTitle && <p className="error">{errors.recipeTitle}</p>} */}
+                            {errors.calorieCount && <p className="error">{errors.calorieCount}</p>}
                         </Form.Group>
                     </Row>
                     <Row>
@@ -180,6 +167,7 @@ const CreateRecipePage = () => {
                         {['checkbox'].map((type) => (
                             <div key={`inline-${type}`} className="mb-3">
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Pescatarian"
                                     name="group1"
@@ -187,6 +175,7 @@ const CreateRecipePage = () => {
                                     id={`inline-${type}-1`}
                                 />
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Vegetarian"
                                     name="group1"
@@ -194,6 +183,7 @@ const CreateRecipePage = () => {
                                     id={`inline-${type}-2`}
                                 />
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Vegan"
                                     name="group1"
@@ -210,6 +200,7 @@ const CreateRecipePage = () => {
                         {['checkbox'].map((type) => (
                             <div key={`inline-${type}`} className="mb-3">
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Gluten-free"
                                     name="group1"
@@ -217,6 +208,7 @@ const CreateRecipePage = () => {
                                     id={`inline-${type}-1`}
                                 />
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Fat-free"
                                     name="group1"
@@ -224,6 +216,7 @@ const CreateRecipePage = () => {
                                     id={`inline-${type}-2`}
                                 />
                                 <Form.Check
+                                    disabled={true}
                                     inline
                                     label="Peanut-free"
                                     name="group1"

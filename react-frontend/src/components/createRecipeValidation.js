@@ -1,20 +1,23 @@
 const createRecipeValidation = (values) => {
     let errors = {};
 
-    if (!values.recipeTitle) {
-        errors.recipeTitle="Recipe title is required"
+    if (!values.recipeID) {
+        errors.recipeID="Recipe ID is required"
     }
 
-    if (!values.recipeDescription) {
-        errors.recipeDescription="Recipe description is required"
+    if (!values.authorID) {
+        errors.authorID="Author ID is required"
     }
 
-    if (!values.instructions) {
-        errors.instructions="At least one instruction is required"
+    if (!values.name) {
+        errors.name="Title of recipe is required"
     }
 
-    if (!values.ingredients) {
-        errors.ingredients="Ingredients are required"
+    if (!values.prepTime) {
+        errors.prepTime="Prep time is required"
+    }
+    if (!values.calorieCount) {
+        errors.calorieCount="Calorie count is required"
     }
     return errors;
 }
