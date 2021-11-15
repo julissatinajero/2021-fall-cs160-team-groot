@@ -28,11 +28,14 @@ const SignIn = (props) => {
         axios.post('http://localhost:8080/api/auth/signin', values)
         // If promise is fullfilled (status code 200), redirect to profile page and output data on console
         .then(res => { 
+            window.localStorage.setItem("jwt", res.data.jwt);
+            window.localStorage.setItem("userID", res.data.userID);
             props.history.push("/profile");
             console.log(res)
         })
         // If promise is rejected, output error message on console
         .catch(err => console.log(err));
+
     };
 
     const returnHome = () => {
