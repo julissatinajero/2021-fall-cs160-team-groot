@@ -22,9 +22,9 @@ public class Recipe {
 	
 	public Recipe() {}
 	
-	public Recipe(int recipeID, String recipeName, int authorID, List<String> ingredients, List<String> directions, List<String> menu, List<String> restrictions, int calorieCount, int prepTime) {
+	public Recipe(int recipeID, String name, int authorID, List<String> ingredients, List<String> directions, List<String> menu, List<String> restrictions, int calorieCount, int prepTime) {
 		this.recipeID = recipeID;
-		this.name = recipeName;
+		this.name = name;
 		this.authorID = authorID;
 		this.ingredients = ingredients;
 		this.directions = directions;
@@ -40,7 +40,7 @@ public class Recipe {
 		return recipeID;
 	}
 	
-	public String getRecipeName() {
+	public String getName() {
 		return name;
 	}
 	
@@ -80,8 +80,8 @@ public class Recipe {
 		this.recipeID = recipeID;
 	}
 	
-	public void setRecipeName(String recipeName) {
-		this.name = recipeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setAuthorID(int authorID) {
