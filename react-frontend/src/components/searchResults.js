@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import '../css/searchResults.css';
 import { Row, Col, Form, Card } from 'react-bootstrap';
+import qs from 'qs';
+import axios from "axios";
 
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +24,19 @@ const SearchResults = () => {
     const [restrictGenre, setRestrictGenre] = useState([]);
     const [filteredRestrictGenre, setFilteredRestrictGenre] = useState([]);
     const [filterSearchOption, setFilterSearchOption] = useState("");
-    const [searchTester, setSearchTester] = useState([]);
+
+    /*
+    Initially, sets the hook to all recipes to display recipe cards without any user input
+    */
+    useEffect(() => {
+        RecipeService.getAllRecipes()
+            .then((response) => {
+                setSearchResults(response.data);
+            }).catch((e) => {
+                console.log(e);
+            }
+            );
+    }, [])
 
     /*
     useEffect() runs everytime application renders 
@@ -94,13 +108,33 @@ const SearchResults = () => {
     handleClick gets triggered when search bar button is clicked on
     */
     const handleClick = () => {
-        RecipeService.getAllRecipes()
-            .then((response) => {
-                console.log(response);
-            }).catch((e) => {
-                console.log(e);
+        console.log(filterSearchOption.id);
+        if (filterSearchOption.id === 'recipeName') {
+            const params = {
+                name: "Sushi"
             }
-            )
+
+            RecipeService.getRecipeByName(params)
+            .then((response) => {
+                setSearchResults(response.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            }) 
+
+        } else if (filterSearchOption.id === 'ingredients') {
+            const params = {
+                ingredient: "lettuce"
+            }
+            const ingredient = "lettuce"
+            RecipeService.getRecipeByIngredients(qs.stringify(ingredient))
+            .then((response) => {
+                setSearchResults(response.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+        }
     }
 
     // Grabbing user input from search and setting it to the filteredData hook
@@ -284,15 +318,7 @@ const SearchResults = () => {
 
                             <Row>
                                 {
-                                    /* (dmmydata.map((val, key) => {
-                                        return (
-                                            <Col xs={3} className="mb-2" key={key}>
-                                                <RecipeCard data={val} />
-                                            </Col>
-                                        );
-                                    })) */
-
-                                    (searchTester.map((val, key) => {
+                                    (searchResults.map((val, key) => {
                                         return (
                                             <Col xs={3} className="mb-2" key={key}>
                                                 <RecipeCard data={val} />

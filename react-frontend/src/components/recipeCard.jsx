@@ -9,10 +9,10 @@ export function RecipeCard({ data }) {
             <Card.Img variant="top" src={"https://cdn.pixabay.com/photo/2020/10/19/01/41/apples-5666483_1280.png"} />
             <Card.Body className="d-flex flex-column"> 
                 <div className="d-flex mb-2 justify-content-between">
-                    <Card.Title className="mb-0 font-weight-bold text-center">{data.recipe_name}</Card.Title>
+                    <Card.Title className="mb-0 font-weight-bold text-center">{data.recipeName}</Card.Title>
                 </div>
-                <Card.Text style={{fontSize: 15}}>Calarie count: {data.calorie_count}</Card.Text>
-                <Card.Text style={{fontSize: 15}}>Prep Time: {data.prep_time} min</Card.Text>
+                <Card.Text style={{fontSize: 15}}>Calorie count: {data.calorieCount}</Card.Text>
+                <Card.Text style={{fontSize: 15}}>Prep Time: {data.prepTime} min</Card.Text>
                 <Button style={{ backgroundColor: "#68a574", border:"none" }}>View</Button>
             </Card.Body>
         </Card>

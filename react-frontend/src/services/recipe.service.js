@@ -10,8 +10,8 @@ class RecipeService {
         return http.get(`/recipe/${id}`)
     }
 
-    getRecipeByName() {
-        return http.get(`/recipe/names`)
+    getRecipeByName(name) {
+        return http.get(`/recipe/names`, name)
     }
 
     getRecipeByRestriction() {
@@ -22,8 +22,8 @@ class RecipeService {
         return http.get(`/recipe/menu`)
     }
 
-    getRecipeByIngredients() {
-        return http.get(`/recipe/ingredients`)
+    getRecipeByIngredients(ingredient) {
+        return http.get(`/recipe/ingredients`, ingredient)
     }
 }
 export default new RecipeService();
