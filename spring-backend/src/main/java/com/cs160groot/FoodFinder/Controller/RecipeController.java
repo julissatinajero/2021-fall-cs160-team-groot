@@ -43,7 +43,7 @@ public class RecipeController {
 		this.mongoTemplate = mongoTemplate;
 		
 		
-		List<String> ingredients1 = Arrays.asList("tomato","cucumber","lettuce","carrot","salad dressing", "salt","pepper");
+		/*List<String> ingredients1 = Arrays.asList("tomato","cucumber","lettuce","carrot","salad dressing", "salt","pepper");
 		List<String> menu1 = Arrays.asList("Vegetarian","Vegan");
 		List<String> restrictions1 = Arrays.asList("gluten-free","peanut-free");
 		List<String> directions1 = Arrays.asList("Mix vegetables in a large bowl.","Top with salad dressing of choice.","Serve.");
@@ -111,7 +111,7 @@ public class RecipeController {
 		recipeRepository.save(r6);
 		recipeRepository.save(r7);
 		recipeRepository.save(r8);
-		
+		*/
 		
 	}
 	
@@ -219,7 +219,7 @@ public class RecipeController {
 	}
 	
 	/* API to retrieve a list of recipes by providing info from multiple categories
-	 * Example: localhost:8080/api/recipe/search?name=pasta%menu=vegan%restriction=peanut-free,fat-free
+	 * Example: localhost:8080/api/recipe/search?name=pasta&menu=vegan&restriction=peanut-free,fat-free
 	 * If you want to leave one of the categories empty, format like this: Ex (to leave name empty): http://localhost:8080/api/recipe/search?name=&menu=veggie,vegan&restriction=soy-free,gluten-free
 	 */
 	@GetMapping("/search")
