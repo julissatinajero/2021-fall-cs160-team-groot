@@ -219,7 +219,7 @@ public class RecipeController {
 	}
 	
 	/* API to retrieve a list of recipes by providing info from multiple categories
-	 * Example: localhost:8080/api/recipe/search?name=pasta%menu=vegan%restriction=peanut-free,fat-free
+	 * Example: localhost:8080/api/recipe/search?name=pasta&menu=vegan&restriction=peanut-free,fat-free
 	 * If you want to leave one of the categories empty, format like this: Ex (to leave name empty): http://localhost:8080/api/recipe/search?name=&menu=veggie,vegan&restriction=soy-free,gluten-free
 	 */
 	@GetMapping("/search")
@@ -234,7 +234,7 @@ public class RecipeController {
 		}
 		if (!menu.isEmpty())
 		{
-		recipeCriteria.add(Criteria.where("menu").is(menu));
+		recipeCriteria.add(Criteria.where("menu").in(menu));
 		}
 		if (!restriction.isEmpty())
 		{
