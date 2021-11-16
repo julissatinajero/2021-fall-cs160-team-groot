@@ -30,7 +30,7 @@ public class AppUserController {
 		Preferences pref2 = new Preferences();
 		Preferences pref3 = new Preferences(null, Arrays.asList("vegan"), null);
 		AppUser user1 = new AppUser(100, "John", "Doe", "johndoe@gmail.com", "John123", "John456", 
-				Arrays.asList(0,2), Arrays.asList(3,1), pref1);
+				Arrays.asList(0,2,5,9), Arrays.asList(3,1), pref1);
 		AppUser user2 = new AppUser(200, "Jane", "Jam", "janejam@gmail.com", "JaneJane", "1234321", 
 				Arrays.asList(6,4), Arrays.asList(2,3), pref2);
 		AppUser user3 = new AppUser(300, "Ben", "Brian", "benbrain1@gmail.com", "BrianBen", "123123", 
@@ -41,31 +41,67 @@ public class AppUserController {
 	}
 
 	@GetMapping("/{userID}")
-	public Optional<AppUser> getAppUser(@PathVariable int userID) {
-		return appUserRepository.findById(userID);
+	public AppUser getAppUser(@PathVariable String userID) throws Exception {
+		int id;
+		try {
+			id = Integer.parseInt(userID); 
+		} catch (Exception e) {
+			throw new Exception("Error: Invalid ID '" + userID + "'");
+		}
+		
+		return appUserRepository.findById(id)
+				.orElseThrow(() -> new Exception("Error: Cannot find user '" + id + "'"));
 	}
 	
 	@PostMapping
-	public AppUser postAppUser(@RequestBody AppUser appUser) {
+	public AppUser postAppUser(@RequestBody AppUser appUser) throws Exception {
+		int id = appUser.getUserID();
+		Optional<AppUser> user = appUserRepository.findById(id);
+		
+		if(user.isPresent()) {
+			throw new Exception("Error: User ID '" + id + "' already exists");
+		}
+		
 		return appUserRepository.save(appUser);
 	}
 	
-	@GetMapping("/preferences/{userID}")
-	public Preferences getPreferences(@PathVariable int userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
-		return user.get().getPreferences();
+	@GetMapping("/{userID}/preferences")
+	public Preferences getPreferences(@PathVariable String userID) throws Exception {
+		int id;
+		try {
+			id = Integer.parseInt(userID); 
+		} catch (Exception e) {
+			throw new Exception("Error: Invalid ID '" + userID + "'");
+		}
+		AppUser user = appUserRepository.findById(id)
+				.orElseThrow(() -> new Exception("Error: Cannot find user '" + id + "'"));;
+		return user.getPreferences();
 	}
 	
-	@GetMapping("/favorites/{userID}")
-	public List<Integer> getFavorites(@PathVariable int userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
-		return user.get().getFavorited();
+	@GetMapping("/{userID}/favorites")
+	public List<Integer> getFavorites(@PathVariable String userID) throws Exception{
+		int id;
+		try {
+			id = Integer.parseInt(userID); 
+		} catch (Exception e) {
+			throw new Exception("Error: Invalid ID '" + userID + "'");
+		}
+		AppUser user = appUserRepository.findById(id)
+				.orElseThrow(() -> new Exception("Error: Cannot find user '" + id + "'"));;
+		return user.getFavorited();
 	}
 	
-	@GetMapping("/uploads/{userID}")
-	public List<Integer> getUploads(@PathVariable int userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
-		return user.get().getUploaded();
+	@GetMapping("/{userID}/uploads")
+	public List<Integer> getUploads(@PathVariable String userID) throws Exception{
+		int id;
+		try {
+			id = Integer.parseInt(userID); 
+		} catch (Exception e) {
+			throw new Exception("Error: Invalid ID '" + userID + "'");
+		}
+		AppUser user = appUserRepository.findById(id)
+				.orElseThrow(() -> new Exception("Error: Cannot find user '" + id + "'"));;
+		return user.getUploaded();
 	}
 	
 }
