@@ -113,4 +113,16 @@ describe('Sign In Tests', function () {
     cy.url().should('include', '/sign-in')
   })
 
+  // TEST 6: Redirect to Home Page if Return button is clicked
+  it('Return Button redirects to home page', function () {
+    cy.visit('http://localhost:3000/sign-in')
+
+    // Click the return button
+    cy.get(':nth-child(2) > .signIn-button-formatting > .signIn-button-styling')
+      .should('be.visible')
+      .click()
+    // An window alert should pop up stating that their username or password is incorrect
+    cy.url().should('eq', 'http://localhost:3000/')
+  })
+
 })
