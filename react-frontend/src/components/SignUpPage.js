@@ -148,7 +148,7 @@ const SignUpPage = (props) => {
                                     </div>
                                 </Col>
                                 <Col>
-                                    <div lassName="text-center">
+                                    <div className="text-center">
                                         <Button className="returnButton" onClick={returnHome}>Return</Button>
                                     </div>
                                 </Col>
