@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/createRecipe.css';
 import {Button, Form, Row,} from 'react-bootstrap';
 import validationCreateRecipe from "./createRecipeValidation"
@@ -22,34 +22,33 @@ const CreateRecipePage = () => {
 
     // Ingredients and Directions List
     const [ingredientList, setIngredientList] = useState([
-        { name: '', value: '' },
+        "",
     ]);
     const [directionList, setDirectionList] = useState([
-        { name: '', value: '' },
+        "",
     ]);
 
     // Empty Rows
-    const emptyIngredient = { name: '', value: '' };
-    const emptyDirection = { name: '', value: '' };
+    const emptyIngredient = "";
+    const emptyDirection = "";
 
     const addDirection = () => {
-        setDirectionList([...directionList, {...emptyDirection}]);
+        setDirectionList([...directionList, emptyDirection]);
     };
 
     const HandleDirectionChange = (e) => {
         const updatedDirection = [...directionList];
-        updatedDirection[e.target.dataset.index] = e.target.value;
+        updatedDirection[e.target.dataset.idx] = e.target.value;
         setDirectionList(updatedDirection);
-        console.log(directionList)
     };
 
     const addIngredient = () => {
-        setIngredientList([...ingredientList, {...emptyIngredient}]);
+        setIngredientList([...ingredientList, emptyIngredient]);
     };
 
     const HandleIngredientChange = (e) => {
         const updatedIngredient = [...ingredientList];
-        updatedIngredient[e.target.dataset.index] = e.target.value;
+        updatedIngredient[e.target.dataset.idx] = e.target.value;
         setIngredientList(updatedIngredient);
     };
 
@@ -63,24 +62,20 @@ const CreateRecipePage = () => {
         });
     }
 
+    // Force any changes to values to wait to finish
+    useEffect(() => {
+        console.log(values);
+    }, [values]);
+
     const HandleFormSubmit = (event) => {
         event.preventDefault();
         //Validating user input
         setErrors(validationCreateRecipe(values));
-        // TEMP Check the request
-        console.log(directionList);
-        let dirTemp = [];
-        for(let direction in directionList){
-            console.log(directionList[direction]);
-            dirTemp.push(directionList[direction].value);
-        }
-        console.log(dirTemp);
-        setValues({
-            ...values,
-            ["directions"]: [...dirTemp]
-        })
-
-        console.log(values);
+        // Add the direction and ingredients to the values request
+        let temp = {...values}
+        temp["directions"] = directionList;
+        temp["ingredients"] = ingredientList;
+        setValues(temp);
 
         // Submit the request to the backend
         RecipeDataService.postRecipe(values).then(
@@ -103,7 +98,7 @@ const CreateRecipePage = () => {
                         <div className="Author-Date">Auto-Generate Author + Date Here</div>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-3" controlId="recipeID">
+                        <Form.Group className="mb-1" controlId="recipeID">
                             <Form.Label>Recipe ID</Form.Label>
                             <Form.Control
                                 type="number"
@@ -116,7 +111,7 @@ const CreateRecipePage = () => {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-3" controlId="authorID">
+                        <Form.Group className="mb-1" controlId="authorID">
                             <Form.Label>Author ID</Form.Label>
                             <Form.Control
                                 type="number"
@@ -129,7 +124,7 @@ const CreateRecipePage = () => {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-3" controlId="name">
+                        <Form.Group className="mb-1" controlId="name">
                             <Form.Label>Title of Recipe</Form.Label>
                             <Form.Control
                                 placeholder="Title"
@@ -144,17 +139,18 @@ const CreateRecipePage = () => {
                         <div class="col-10">
                             {/**<Form.Group className="mb-3" controlId="directions">*/}
                                 {/**</div><Form.Label>List the instructions</Form.Label>*/}
-                                <h2>List the instructions</h2>
+                                <h3>List the instructions</h3>
                                 {
                                     directionList.map((element, index) => {
                                         return(
                                             <div key={`direction-${index}`}>
-                                            <Form.Group className="mb-3" controlId={`direction-${index}`}>
+                                            <Form.Group className="mb-1" controlId={`direction-${index}`}>
                                                 <Form.Label>{`Step #${index + 1}`}</Form.Label>
                                                 <Form.Control
                                                     type="text"
                                                     name={`dir-${index}`}
-                                                    value={directionList[index].value.value}
+                                                    data-idx={`${index}`}
+                                                    value={directionList[index].value}
                                                     placeholder="Instruction"
                                                     onChange={HandleDirectionChange}
                                                 />
@@ -175,27 +171,40 @@ const CreateRecipePage = () => {
                     </Row>
                     <Row>
                         <div class="col-10">
-                            <Form.Group className="mb-3" controlId="ingredients">
-                                <Form.Label>List the ingredients</Form.Label>
-                                <Form.Control
-                                    //placeholder="Ingredient"
-                                    //name="ingredients"
-                                    //value={values.ingredients}
-                                    //onChange={HandleChange}
-                                    plaintext readOnly defaultValue="Can not include at the moment"
-                                /> 
-                                </Form.Group>
+                            <h3>List of Ingredients</h3>
+                            {/**<Form.Group className="mb-3" controlId="ingredients">*/}
+                                {/**<Form.Label>List the ingredients</Form.Label>**/}
+                                {
+                                    ingredientList.map((element, index) => {
+                                        return(
+                                            <div key={`ingredient-${index}`}>
+                                            <Form.Group className="mb-1" controlId={`ingredient-${index}`}>
+                                                <Form.Label>{`Item #${index + 1}`}</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name={`ing-${index}`}
+                                                    data-idx={`${index}`}
+                                                    value={ingredientList[index].value}
+                                                    placeholder="Ingredient"
+                                                    onChange={HandleIngredientChange}
+                                                />
+                                            </Form.Group>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {/**</Form.Group>**/}
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button className="plus-button">Add</Button>
+                                    <Button className="plus-button" onClick={addIngredient}>Add</Button>
                                 </div>
                             </div>
                         </div>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-3" controlId="prepTime">
+                        <Form.Group className="mb-1" controlId="prepTime">
                             <Form.Label>Prep Time In Minutes</Form.Label>
                             <Form.Control
                                 type="number"
@@ -208,7 +217,7 @@ const CreateRecipePage = () => {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-3" controlId="calorieCount">
+                        <Form.Group className="mb-1" controlId="calorieCount">
                             <Form.Label>Calorie Count</Form.Label>
                             <Form.Control
                                 type="number"
@@ -224,7 +233,7 @@ const CreateRecipePage = () => {
                         <div style={{ paddingBottom: "15px" }}>
                         <Form.Label >Diet</Form.Label>
                         {['checkbox'].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3">
+                            <div key={`inline-${type}`} className="mb-1">
                                 <Form.Check
                                     disabled={true}
                                     inline
@@ -257,7 +266,7 @@ const CreateRecipePage = () => {
                         <div style={{ paddingBottom: "15px" }}>
                         <Form.Label >Restrictions</Form.Label>
                         {['checkbox'].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3">
+                            <div key={`inline-${type}`} className="mb-1">
                                 <Form.Check
                                     disabled={true}
                                     inline
