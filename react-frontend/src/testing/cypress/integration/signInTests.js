@@ -19,7 +19,28 @@ describe('Sign In Tests', function () {
     cy.url().should('include', '/sign-in')
   })
 
-  // TEST 2: Redirects if successfully signed in
+  // TEST 2: Unsuccessful sign in (Missing the password)
+  it('Unsuccessful login: Submitting a form without a password', function () {
+    cy.visit('http://localhost:3000/sign-in')
+
+    // Inputs a username; Doesn't input the password
+    cy.get('#username')
+      .should('be.visible')
+      .type('test')
+    cy.get('button[type="submit"]')
+      .should('be.visible')
+      .click()
+    // An window alert should pop up stating that their username or password is incorrect
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Incorrect username or password!`)
+    })
+    // The validation checks should pop indicating a password is required
+    cy.get('[style="padding-top: 20px;"] > .error').should('be.visible')
+
+    cy.url().should('include', '/sign-in')
+  })
+
+  // TEST 3: Redirects if successfully signed in
   it('Successful login', function () {
     // Create a user 
     cy.request({
