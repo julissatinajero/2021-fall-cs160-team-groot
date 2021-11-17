@@ -3,7 +3,8 @@ import '../css/createRecipe.css';
 import {Button, Form, Row,} from 'react-bootstrap';
 import validationCreateRecipe from "./createRecipeValidation"
 
-import RecipeDataService from '../services/recipe.services';
+// import RecipeDataService from '../services/recipe.services';
+import CreateRecipeDataService from '../services/recipecreate.service';
 
 
 const CreateRecipePage = () => {
@@ -58,7 +59,9 @@ const CreateRecipePage = () => {
         //Then assign the value given by users based on the names
         setValues({
             ...values,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            ["directions"]: directionList,
+            ["ingredients"]: ingredientList
         });
     }
 
@@ -78,7 +81,7 @@ const CreateRecipePage = () => {
         setValues(temp);
 
         // Submit the request to the backend
-        RecipeDataService.postRecipe(values).then(
+        CreateRecipeDataService.postRecipe(values).then(
             (response) => {
                 console.log(response.data);
             }
