@@ -122,17 +122,20 @@ const SearchResults = () => {
                 correctWordFormat = words.join(" ");
             }
 
-            const res = await axios.get('http://localhost:8080/api/recipe/search', { params: { 
-            name: correctWordFormat,
-            menu: dietGenre.toString(),
-            restriction: restrictGenre.toString() } })
+            const res = await axios.get('http://localhost:8080/api/recipe/search', {
+                params: {
+                    name: correctWordFormat,
+                    menu: dietGenre.toString(),
+                    restriction: restrictGenre.toString()
+                }
+            })
                 .then((response) => {
                     setSearchResults(response.data);
                     console.log(response.data);
                 }).catch((e) => {
                     setSearchResults(-1);
                     console.log(e);
-                }) 
+                })
             console.log(correctWordFormat);
             console.log(res);
         }
@@ -149,7 +152,7 @@ const SearchResults = () => {
                     setSearchResults(-1);
                     console.log(e);
                 })
-        } 
+        }
         // If the user is searching by diet
         else if (filterSearchOption.id === 'diet') {
             /* Throws an error if the user input string is empty and is converted to lower case
@@ -169,7 +172,7 @@ const SearchResults = () => {
                         console.log(e);
                     })
             }
-        } 
+        }
         // If the user is searching by restrictions
         else if (filterSearchOption.id === 'restriction') {
             var correctWordFormat;
@@ -185,28 +188,32 @@ const SearchResults = () => {
         }
         /* Search by recipe category is set by default if the user doesn't check radio button, 
         so leave the 'search by recipe' for the else statement 
-        */ 
+        */
         else {
             var correctWordFormat;
 
-            if (filteredData.toString().split(" ").length > 1) {
-                let changeToLowerCase = filteredData.toString().toLowerCase();
-                const words = changeToLowerCase.split(" ");
+            if (filteredData.length === 0 || filteredData.toString().trim().length == 0) {
+                setSearchResults(-1);
+            } else {
+                if (filteredData.toString().split(" ").length > 1) {
+                    let changeToLowerCase = filteredData.toString().toLowerCase();
+                    const words = changeToLowerCase.split(" ");
 
-                for (let i = 0; i < words.length; i++) {
-                    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    for (let i = 0; i < words.length; i++) {
+                        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    }
+
+                    correctWordFormat = words.join(" ");
                 }
 
-                correctWordFormat = words.join(" ");
+                const res = await axios.get('http://localhost:8080/api/recipe/names', { params: { name: correctWordFormat } })
+                    .then((response) => {
+                        setSearchResults(response.data);
+                    }).catch((e) => {
+                        setSearchResults(-1);
+                        console.log(e);
+                    })
             }
-
-            const res = await axios.get('http://localhost:8080/api/recipe/names', { params: { name: correctWordFormat } })
-                .then((response) => {
-                    setSearchResults(response.data);
-                }).catch((e) => {
-                    setSearchResults(-1);
-                    console.log(e);
-                })
 
         }
     }
