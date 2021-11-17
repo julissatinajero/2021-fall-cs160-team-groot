@@ -65,7 +65,7 @@ describe('Sign In Tests', function () {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Incorrect username or password!`)
     })
-    // A validation check should pop indicating a password is required
+    // A validation check should pop up indicating a password is required
     cy.get('[style="padding-top: 20px;"] > .error').should('be.visible')
 
     cy.url().should('include', '/sign-in')
@@ -86,7 +86,7 @@ describe('Sign In Tests', function () {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Incorrect username or password!`)
     })
-    // A validation check should pop indicating a username is required
+    // A validation check should pop up indicating a username is required
     cy.get(':nth-child(1) > .error').should('be.visible')
 
     cy.url().should('include', '/sign-in')
@@ -121,7 +121,7 @@ describe('Sign In Tests', function () {
     cy.get(':nth-child(2) > .signIn-button-formatting > .signIn-button-styling')
       .should('be.visible')
       .click()
-    // An window alert should pop up stating that their username or password is incorrect
+    // Redirect to home page
     cy.url().should('eq', 'http://localhost:3000/')
   })
 
