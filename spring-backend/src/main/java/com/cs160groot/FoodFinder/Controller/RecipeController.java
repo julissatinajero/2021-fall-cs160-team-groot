@@ -234,7 +234,7 @@ public class RecipeController {
 		}
 		if (!menu.isEmpty())
 		{
-		recipeCriteria.add(Criteria.where("menu").is(menu));
+		recipeCriteria.add(Criteria.where("menu").in(menu));
 		}
 		if (!restriction.isEmpty())
 		{
