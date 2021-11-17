@@ -20,6 +20,39 @@ const CreateRecipePage = () => {
     });
     const [errors, setErrors] = useState({});
 
+    // Ingredients and Directions List
+    const [ingredientList, setIngredientList] = useState([
+        { name: '', value: '' },
+    ]);
+    const [directionList, setDirectionList] = useState([
+        { name: '', value: '' },
+    ]);
+
+    // Empty Rows
+    const emptyIngredient = { name: '', value: '' };
+    const emptyDirection = { name: '', value: '' };
+
+    const addDirection = () => {
+        setDirectionList([...directionList, {...emptyDirection}]);
+    };
+
+    const HandleDirectionChange = (e) => {
+        const updatedDirection = [...directionList];
+        updatedDirection[e.target.dataset.index] = e.target.value;
+        setDirectionList(updatedDirection);
+        console.log(directionList)
+    };
+
+    const addIngredient = () => {
+        setIngredientList([...ingredientList, {...emptyIngredient}]);
+    };
+
+    const HandleIngredientChange = (e) => {
+        const updatedIngredient = [...ingredientList];
+        updatedIngredient[e.target.dataset.index] = e.target.value;
+        setIngredientList(updatedIngredient);
+    };
+
     const HandleChange = (event) => {
         //Sets the value for each input field
         //First take the initial values of each field
@@ -34,6 +67,20 @@ const CreateRecipePage = () => {
         event.preventDefault();
         //Validating user input
         setErrors(validationCreateRecipe(values));
+        // TEMP Check the request
+        console.log(directionList);
+        let dirTemp = [];
+        for(let direction in directionList){
+            console.log(directionList[direction]);
+            dirTemp.push(directionList[direction].value);
+        }
+        console.log(dirTemp);
+        setValues({
+            ...values,
+            ["directions"]: [...dirTemp]
+        })
+
+        console.log(values);
 
         // Submit the request to the backend
         RecipeDataService.postRecipe(values).then(
@@ -95,21 +142,33 @@ const CreateRecipePage = () => {
                     </Row>
                     <Row>
                         <div class="col-10">
-                            <Form.Group className="mb-3" controlId="directions">
-                                <Form.Label>List the instructions</Form.Label>
-                                <Form.Control
-                                    //placeholder="Instruction"
-                                    //name="directions"
-                                    // value={values.directions}
-                                    // onChange={HandleChange}
-                                    plaintext readOnly defaultValue="Can not include at the moment"
-                                /> 
-                            </Form.Group>
+                            {/**<Form.Group className="mb-3" controlId="directions">*/}
+                                {/**</div><Form.Label>List the instructions</Form.Label>*/}
+                                <h2>List the instructions</h2>
+                                {
+                                    directionList.map((element, index) => {
+                                        return(
+                                            <div key={`direction-${index}`}>
+                                            <Form.Group className="mb-3" controlId={`direction-${index}`}>
+                                                <Form.Label>{`Step #${index + 1}`}</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name={`dir-${index}`}
+                                                    value={directionList[index].value.value}
+                                                    placeholder="Instruction"
+                                                    onChange={HandleDirectionChange}
+                                                />
+                                            </Form.Group>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            {/**</Form.Group>**/}
                         </div>
                         <div class="col-2">
                             <div className="outer-div-one-btn">
                                 <div className="outer-div-two-btn">
-                                    <Button className="plus-button">Add</Button>
+                                    <Button className="plus-button" onClick={addDirection}>Add</Button>
                                 </div>
                             </div>
                         </div>
