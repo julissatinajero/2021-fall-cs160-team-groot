@@ -75,7 +75,7 @@ describe('Sign In Tests', function () {
   it('Unsuccessful login: Submitting a form without a username', function () {
     cy.visit('http://localhost:3000/sign-in')
 
-    // Inputs a username; Doesn't input the password
+    // Inputs a password; Doesn't input the username
     cy.get('#password')
       .should('be.visible')
       .type('test1')
@@ -86,9 +86,30 @@ describe('Sign In Tests', function () {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Incorrect username or password!`)
     })
-    // The validation checks should pop indicating a password is required
+    // The validation checks should pop indicating a username is required
     cy.get(':nth-child(1) > .error').should('be.visible')
 
+    cy.url().should('include', '/sign-in')
+  })
+
+  // TEST 5: Unsuccessful sign in (Input an unrecognized username and password)
+  it('Unsuccessful login: Submitting a form without a username', function () {
+    cy.visit('http://localhost:3000/sign-in')
+
+    // Inputs a username; Doesn't input the password
+    cy.get('#username')
+      .should('be.visible')
+      .type('unknownUsername')
+    cy.get('#password')
+      .should('be.visible')
+      .type('unknownPassword')
+    cy.get('button[type="submit"]')
+      .should('be.visible')
+      .click()
+    // An window alert should pop up stating that their username or password is incorrect
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Incorrect username or password!`)
+    })
     cy.url().should('include', '/sign-in')
   })
 
