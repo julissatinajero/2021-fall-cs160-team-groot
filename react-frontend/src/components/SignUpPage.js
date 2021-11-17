@@ -36,6 +36,7 @@ const SignUpPage = (props) => {
         UserDataService.postSignup(values).then(
             (response) => {
                 console.log(response.data);
+                props.history.push("/sign-in");
             }
         ).catch(
             (e) => {
