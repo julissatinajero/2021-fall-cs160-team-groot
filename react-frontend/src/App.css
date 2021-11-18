@@ -38,23 +38,11 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
-body {
+.ff-font {
   font-family: 'Gabriela', Arial, Helvetica, sans-serif;
   color: #6da778;
 }
 
-.title {
-  font-size: 400%;
-}
-
-.buttonHome {
-  background-color: #7bed8d; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: medium;
-  border-radius: 12px;
+.ff-altcolor {
+  color: #6d7fa7;
 }
