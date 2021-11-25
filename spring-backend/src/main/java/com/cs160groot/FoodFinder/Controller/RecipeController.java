@@ -200,7 +200,7 @@ public class RecipeController {
 	{
 		AppUser user = appUserRepository.findById(userID)
 				.orElseThrow(()-> new Exception("User with id: "+userID+" not found."));
-		ArrayList<Integer> favorites = new ArrayList<>();
+		List<Integer> favorites = new ArrayList<>();
 		favorites = user.getFavorited();
 		favorites.add(recipeID);
 		user.setFavorited(favorites);
