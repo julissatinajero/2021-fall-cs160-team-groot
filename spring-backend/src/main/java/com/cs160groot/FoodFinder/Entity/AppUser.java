@@ -2,22 +2,21 @@ package com.cs160groot.FoodFinder.Entity;
 
 import java.util.ArrayList; 
 import java.util.UUID;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class AppUser {
-	@Id 
+	@Id
 	private String userID;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String username;
 	private String password;
-	private List<Integer> uploaded;
-	private List<Integer> favorited;
+	private ArrayList<Integer> uploaded;
+	private ArrayList<Integer> favorited;
 	private Preferences preferences;
 	
 	public AppUser() {}
@@ -82,19 +81,19 @@ public class AppUser {
 		this.password = password;
 	}
 	
-	public List<Integer> getUploaded() {
+	public ArrayList<Integer> getUploaded() {
 		return this.uploaded;
 	}
 	
-	public void setUploaded(List<Integer> uploaded) {
+	public void setUploaded(ArrayList<Integer> uploaded) {
 		this.uploaded = uploaded;
 	}
 	
-	public List<Integer> getFavorited() {
+	public ArrayList<Integer> getFavorited() {
 		return this.favorited;
 	}
 	
-	public void setFavorited(List<Integer> favorited) {
+	public void setFavorited(ArrayList<Integer> favorited) {
 		this.favorited = favorited;
 	}
 	
