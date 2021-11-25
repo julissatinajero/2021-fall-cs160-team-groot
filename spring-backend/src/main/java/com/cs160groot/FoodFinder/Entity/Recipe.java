@@ -11,10 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Recipe {
 	@Id
 	private int recipeID;
-	private String recipeName;
+	private String name;
 	private int authorID;
 	private List<String> ingredients;
-	private String directions;
+	private List<String> directions;
 	private List<String> menu;
 	private List<String> restrictions;
 	private int calorieCount;
@@ -22,9 +22,9 @@ public class Recipe {
 	
 	public Recipe() {}
 	
-	public Recipe(int recipeID, String recipeName, int authorID, List<String> ingredients, String directions, List<String> menu, List<String> restrictions, int calorieCount, int prepTime) {
+	public Recipe(int recipeID, String name, int authorID, List<String> ingredients, List<String> directions, List<String> menu, List<String> restrictions, int calorieCount, int prepTime) {
 		this.recipeID = recipeID;
-		this.recipeName = recipeName;
+		this.name = name;
 		this.authorID = authorID;
 		this.ingredients = ingredients;
 		this.directions = directions;
@@ -40,8 +40,8 @@ public class Recipe {
 		return recipeID;
 	}
 	
-	public String getRecipeName() {
-		return recipeName;
+	public String getName() {
+		return name;
 	}
 	
 	public int getAuthorID() {
@@ -52,7 +52,7 @@ public class Recipe {
 		return ingredients;
 	}
 	
-	public String getDirections() {
+	public List<String> getDirections() {
 		return directions;
 	}
 	
@@ -80,8 +80,8 @@ public class Recipe {
 		this.recipeID = recipeID;
 	}
 	
-	public void setRecipeName(String recipeName) {
-		this.recipeName = recipeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setAuthorID(int authorID) {
@@ -92,7 +92,7 @@ public class Recipe {
 		this.ingredients = ingredients;
 	}
 	
-	public void setDirections(String directions) {
+	public void setDirections(List<String> directions) {
 		this.directions = directions;
 	}
 	

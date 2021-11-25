@@ -1,9 +1,9 @@
-html{
+/*html{
     height: 100%;
     background-image: url("https://cdn.dribbble.com/users/6407551/screenshots/14739480/media/ad2c082fe7c323212f51ff9e48bd00b7.png?compress=1&resize=1600x1200");
     background-repeat: no-repeat;
     background-size:cover;
-}
+}*/
 
 .background {
     height: 100%;
@@ -27,4 +27,11 @@ html{
 
 .error {
     color: red;
+}
+
+.returnButton {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    width: 84px;
 }

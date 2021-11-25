@@ -1,7 +1,8 @@
 package com.cs160groot.FoodFinder.Entity;
 
-import java.util.ArrayList; 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,36 +10,35 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class AppUser {
 	@Id
-	private int userID;
+	private String userID;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String username;
 	private String password;
-	private ArrayList<Integer> uploaded;
-	private ArrayList<Integer> favorited;
+	private List<Integer> uploaded;
+	private List<Integer> favorited;
 	private Preferences preferences;
 	
 	public AppUser() {}
 	
-	public AppUser(int userID, String firstName, String lastName, String email, String username, String password, 
-			ArrayList<Integer> uploaded, ArrayList<Integer> favorited, Preferences preferences) {
-		this.userID = userID;
+	public AppUser(String firstName, String lastName, String email, String username, String password) {
+		this.userID = UUID.nameUUIDFromBytes(email.getBytes()).toString();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.uploaded = uploaded;
-		this.favorited = favorited;
-		this.preferences = preferences;
+		this.uploaded = new ArrayList<>();
+		this.favorited = new ArrayList<>();
+		this.preferences = new Preferences();
 	}
 	
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 	
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
@@ -82,19 +82,19 @@ public class AppUser {
 		this.password = password;
 	}
 	
-	public ArrayList<Integer> getUploaded() {
+	public List<Integer> getUploaded() {
 		return this.uploaded;
 	}
 	
-	public void setUploaded(ArrayList<Integer> uploaded) {
+	public void setUploaded(List<Integer> uploaded) {
 		this.uploaded = uploaded;
 	}
 	
-	public ArrayList<Integer> getFavorited() {
+	public List<Integer> getFavorited() {
 		return this.favorited;
 	}
 	
-	public void setFavorited(ArrayList<Integer> favorited) {
+	public void setFavorited(List<Integer> favorited) {
 		this.favorited = favorited;
 	}
 	
