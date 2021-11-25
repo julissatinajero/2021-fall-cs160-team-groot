@@ -6,13 +6,16 @@ import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../css/DisplayPage.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import UserDataService from '../services/user.service';
+import RecipeService from '../services/recipe.service';
 
 const DisplayPage = (props) => {
     //Grabbing ID from URL
     const { id } = useParams();
-    console.log(id);
+    // console.log(id); // Recipe ID testing
 
     const [recipe, setRecipe] = useState([]);
+    const [userId, setUserId] = useState(null);
 
     /* When rendered, grab recipe ID from URL to search for recipe in database
     through GET request */
@@ -29,6 +32,29 @@ const DisplayPage = (props) => {
     const returnToSearch = () => {
         props.history.push("/search");
     };
+
+    const getUserId = () => {
+        var currentUserId;
+        currentUserId = localStorage.getItem("userID");
+        
+        return currentUserId;
+    }
+
+    const favoriteRecipeButton = () => {
+        let currentUserId = getUserId();
+        
+        RecipeService.favoriteRecipe(currentUserId.toString(), parseInt(id)).then((data) => {
+            console.log(data);
+        }).catch((e) => {
+            console.log(e)
+        })
+    }
+
+    /*
+    const addToFavorites = () => {
+        console.log(userId)
+    }*/
+
     return (
         <div className="background">
             <Card className="displayCard" style={{ width: '80%' }}>
@@ -123,7 +149,7 @@ const DisplayPage = (props) => {
                                     </Card.Text>
                                 </Card>
                                 <br></br>
-                                <Button variant="outline-dark" className="favoriteButton">
+                                <Button variant="outline-dark" className="favoriteButton" onClick={favoriteRecipeButton}>
                                     <text className="regularFont text-center"> &nbsp;
                                     <FontAwesomeIcon icon={faHeart} />
                                     &nbsp;

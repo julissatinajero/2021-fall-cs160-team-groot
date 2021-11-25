@@ -7,23 +7,27 @@ class RecipeService {
     }
 
     getRecipe(id) {
-        return http.get(`/recipe/${id}`)
+        return http.get(`/recipe/${id}`);
     }
 
     getRecipeByName(name) {
-        return http.get(`/recipe/names`, name)
+        return http.get(`/recipe/names`, name);
     }
 
     getRecipeByRestriction() {
-        return http.get(`/recipe/restrictions`)
+        return http.get(`/recipe/restrictions`);
     }
 
     getRecipeByDiet() {
-        return http.get(`/recipe/menu`)
+        return http.get(`/recipe/menu`);
     }
 
     getRecipeByIngredients(ingredient) {
-        return http.get(`/recipe/ingredients`, ingredient)
+        return http.get(`/recipe/ingredients`, ingredient);
+    }
+
+    favoriteRecipe(userID, recipeID) {
+        return http.get(`/recipe/favorite/userID=${userID}/recipeID=${recipeID}`);
     }
 }
 export default new RecipeService();
