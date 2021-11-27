@@ -48,7 +48,9 @@ const ProfilePage = (props) => {
                 return response.data;
             })
             .then((response2) => {
-                setFavoriteRecipes(response2);
+                RecipeDataService.getRecipesByIds(response2).then((response2) => {
+                    setFavoriteRecipes(response2.data);
+                })
             })
             
     }, []);
