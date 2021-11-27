@@ -37,6 +37,19 @@ const SearchResults = (props) => {
             );
     }, [])
 
+    // Handle the data from external sources
+    // The data from Home Page is accessed through props.location.state.term
+    // This is a workaround fix, we can use a better implementation later
+    useEffect(() => {
+        if(props && props.location && props.location.state && props.location.state.term){
+            let search_term = props.location.state.term;
+            setFilteredData(search_term);
+            setWordEntered(search_term);
+            // TODO: This part
+            handleClick();
+        }
+    }, [])
+
     /*
     useEffect() runs everytime application renders 
     Whenever diet genre/checkbox changes, useEffect will run the callback function 

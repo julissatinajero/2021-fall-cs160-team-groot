@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import '../css/home.css';
 import head from '../resources/StockFood.png';
@@ -6,6 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const HomeMasthead = (props) => {
+    // Extra
+    const [searchTerm, setSearchTerm] = useState("");
+    const [wordTerm, setWordTerm] = useState("");
+    const [redirectResults, setRedirectResults] = useState({ redirect: null });
+
     // Redirects; TODO: Turn the buttons into links to remove these functions
     const redirectSignin = () => {
         props.history.push("/sign-in")
@@ -17,9 +22,23 @@ const HomeMasthead = (props) => {
 
     // This will need to be changed when incorporating search terms
     const redirectSearch = () =>{
-        props.history.push("/search")
+        setRedirectResults({ redirect: 1});
+        //props.history.push("/search")
     };
 
+    const setData = (val) => {
+        setSearchTerm(val.target.value);
+        setWordTerm(val.target.value);
+    }
+
+    // Redirect Results
+    if(redirectResults.redirect != null){
+        return <Redirect push to={{
+            pathname: "/search",
+            state: { term: searchTerm }
+        }}/>
+    }
+    
     return(
         <div className="container-fluid">
             <div className="d-flex align-items-center padding-fix row">
@@ -28,7 +47,7 @@ const HomeMasthead = (props) => {
                         <h1 className="title ff-font d-flex justify-content-center">Food Finder</h1>
                         <h2 className="d-flex justify-content-center">Start finding recipes now</h2>
                         <div className="d-flex justify-content-center my-3">
-                            <input type="text" className="searchBar py-1"/>
+                            <input type="text" className="searchBar py-1" onChange={setData} value={wordTerm}/>
                             <button className="buttonSearch col-1 py-1" onClick={redirectSearch}><FontAwesomeIcon icon={faSearch}/></button>
                         </div>                            
                         <div className="row d-flex justify-content-center">
