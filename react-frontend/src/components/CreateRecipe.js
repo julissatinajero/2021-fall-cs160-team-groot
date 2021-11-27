@@ -10,7 +10,7 @@ import UserDataService from '../services/user.service';
 const CreateRecipePage = (props) => {
     // Gets the username information to include on the form
     const [username, setUsername] = useState(null);
-    UserDataService.getUser(localStorage.getItem("userID")).then( (user) => {
+    UserDataService.getUser(localStorage.getItem("username")).then( (user) => {
         setUsername(user.data.username)
     })
     // Gets the date details to include on the form 
