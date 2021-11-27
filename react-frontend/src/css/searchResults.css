@@ -6,6 +6,7 @@
     height: 100vh;
 }
 
+/** TODO: Refactor this to prevent from affecting other rows in other pages **/
 .row{
     padding: 3%;
 }
