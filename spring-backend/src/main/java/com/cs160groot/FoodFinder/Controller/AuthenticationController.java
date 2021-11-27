@@ -64,12 +64,6 @@ public class AuthenticationController {
 		}
 		final UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String jwt = jwtUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUserID()));
+		return ResponseEntity.ok(new AuthenticationResponse(jwt, jwtUtil.extractUsername(jwt)));
 	}	
-	
-	@GetMapping
-	public String test() {
-		return "Hello";
-	}
-	
 }

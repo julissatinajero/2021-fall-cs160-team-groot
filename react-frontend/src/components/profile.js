@@ -33,12 +33,6 @@ const ProfilePage = (props) => {
     // If retrieval is not possible, return error
     console.log(props);
 
-    // may want to change get request from getting user to getting user's name only 
-    // b/c right now, we get all of user's info including password
-    UserDataService.getUser(localStorage.getItem("userID")).then( (user) => {
-        setUsername(user.data.username)
-    })
-
     const search = () => {
         props.history.push("/search");
    };
@@ -47,7 +41,7 @@ const ProfilePage = (props) => {
             <div className="row mt-3">
                 <div className="col-lg-3 card">
                     <img src={icon} alt="Profile Picture" className="card-img-top img-circle"/>
-                    <p className="text-center">{(username === null) ? "No Profile" : username}</p>
+                    <p className="text-center">{localStorage.getItem("username")}</p>
                     <button className="buttonAccount mb-2">Account Settings</button>
                     {/* Change username/password, Change profile pic, Change Visiblity, Delete Account */}
                     <button className="buttonAccount">Food Preferences</button>

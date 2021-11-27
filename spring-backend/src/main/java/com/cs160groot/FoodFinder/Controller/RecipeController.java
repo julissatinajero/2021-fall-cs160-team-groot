@@ -195,11 +195,11 @@ public class RecipeController {
 	/* API to let a user favorite a recipe and have the recipe added to their list of favorites
 	 * Example: localhost:8080/api/recipe/favorite/userID=1/recipeID=4
 	 */
-	@GetMapping("/favorite/userID={userID}/recipeID={recipeID}")
-	public AppUser favoriteRecipe(@PathVariable String userID, @PathVariable int recipeID) throws Exception
+	@GetMapping("/favorite/username={username}/recipeID={recipeID}")
+	public AppUser favoriteRecipe(@PathVariable String username, @PathVariable int recipeID) throws Exception
 	{
-		AppUser user = appUserRepository.findById(userID)
-				.orElseThrow(()-> new Exception("User with id: "+userID+" not found."));
+		AppUser user = appUserRepository.findById(username)
+				.orElseThrow(()-> new Exception("User with id: "+username+" not found."));
 		List<Integer> favorites = new ArrayList<>();
 		favorites = user.getFavorited();
 		favorites.add(recipeID);
@@ -242,18 +242,6 @@ public class RecipeController {
 		}
 		query.addCriteria(new Criteria().andOperator(recipeCriteria.toArray(new Criteria[recipeCriteria.size()])));
 		List<Recipe> result = mongoTemplate.find(query, Recipe.class);
-		return result;
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		return result;		
+	}	
 }

@@ -61,9 +61,9 @@ public class AppUserController {
 		appUserRepository.save(user3);
 	}
 
-	@GetMapping("/{userID}")
-	public Optional<AppUser> getAppUser(@PathVariable String userID) {
-		return appUserRepository.findById(userID);
+	@GetMapping("/{username}")
+	public Optional<AppUser> getAppUser(@PathVariable String username) {
+		return appUserRepository.findById(username);
 	}
 	
 	@PostMapping
@@ -71,21 +71,21 @@ public class AppUserController {
 		return appUserRepository.save(appUser);
 	}
 	
-	@GetMapping("/{userID}/preferences")
-	public Preferences getPreferences(@PathVariable String userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
+	@GetMapping("/{username}/preferences")
+	public Preferences getPreferences(@PathVariable String username) {
+		Optional<AppUser> user = appUserRepository.findById(username);
 		return user.get().getPreferences();
 	}
 	
-	@GetMapping("/{userID}/favorites")
-	public List<Integer> getFavorites(@PathVariable String userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
+	@GetMapping("/{username}/favorites")
+	public List<Integer> getFavorites(@PathVariable String username) {
+		Optional<AppUser> user = appUserRepository.findById(username);
 		return user.get().getFavorited();
 	}
 	
-	@GetMapping("/{userID}/uploads")
-	public List<Integer> getUploads(@PathVariable String userID) {
-		Optional<AppUser> user = appUserRepository.findById(userID);
+	@GetMapping("/{username}/uploads")
+	public List<Integer> getUploads(@PathVariable String username) {
+		Optional<AppUser> user = appUserRepository.findById(username);
 		return user.get().getUploaded();
 	}
 	
