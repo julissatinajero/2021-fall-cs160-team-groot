@@ -2,6 +2,11 @@ import http from "../http-common";
 
 class RecipeService {
     // @GET 
+
+    favoriteRecipe(username, recipeID) {
+        return http.get(`/recipe/favorite/username=${username}/recipeID=${recipeID}`)
+    }
+
     getAllRecipes() {
         return http.get(`/recipe`);
     }

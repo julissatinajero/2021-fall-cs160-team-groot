@@ -20,7 +20,7 @@ const CreateRecipePage = (props) => {
     const [values, setValues] = useState({
         recipeID: "", // Need to figure out a way to generate this
         name: "", // aka recipe Title
-        authorID: "",
+        authorName: localStorage.getItem("username"),
         ingredients: [], 
         directions: [], //aka Instructions
         menu: [], // aka Diet
@@ -159,17 +159,6 @@ const CreateRecipePage = (props) => {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group className="mb-1" controlId="authorID">
-                            <Form.Label>Author ID</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Type in a number"
-                                name="authorID"
-                                value={values.authorID}
-                                onChange={HandleChange}
-                            />
-                            {errors.authorID && <p className="error">{errors.authorID}</p>}
-                        </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group className="mb-1" controlId="name">

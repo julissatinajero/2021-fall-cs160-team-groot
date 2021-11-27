@@ -167,22 +167,16 @@ public class RecipeController {
 	 * Example: localhost:8080/api/recipe/ingredients?ingredient=lettuce,carrots
 	 */
 	@GetMapping("/ingredients")
-	public List<Optional<Recipe>> getRecipesByIngredients(@RequestParam List<String> ingredient)
-	{
-		
-		return recipeRepository.findByIngredientsIn(ingredient);
-			
+	public List<Optional<Recipe>> getRecipesByIngredients(@RequestParam List<String> ingredient) {	
+		return recipeRepository.findByIngredientsIn(ingredient);		
 	}
 	
 	/* API to retrieve a list of recipes by providing one or more menus (type of diet). Recipes that belong to at least one of the menus are returned
 	 * Example: localhost:8080/api/recipe/menu?menu=vegetarian,vegan
 	 */
 	@GetMapping("/menu")
-	public List<Optional<Recipe>> getRecipesByMenus(@RequestParam List<String> menu)
-	{
-		
-		return recipeRepository.findByMenuIn(menu);
-			
+	public List<Optional<Recipe>> getRecipesByMenus(@RequestParam List<String> menu) {
+		return recipeRepository.findByMenuIn(menu);		
 	}
 	
 	
@@ -212,8 +206,6 @@ public class RecipeController {
 		favorites.add(recipeID);
 		user.setFavorited(favorites);
 		return appUserRepository.save(user);
-		
-		
 	}
 	
 	/* API to retrieve a list of recipes by providing one or more recipe names

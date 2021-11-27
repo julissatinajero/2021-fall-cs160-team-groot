@@ -1,9 +1,9 @@
 import React, {Component, useEffect, useState} from "react";
+import {Redirect} from 'react-router-dom';
 import "../css/profile.css"
 import icon from '../resources/StockFood.png';
 
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
-import dmmydata from '../dummyData';
 import RecipeCard from '../components/recipeCard';
 import UtilityCard from '../components/utilityCard';
 
@@ -63,49 +63,56 @@ const ProfilePage = (props) => {
     const search = () => {
         props.history.push("/search");
     };
-   const createRecipe = () => {
-    props.history.push("/create");
+    const createRecipe = () => {
+        props.history.push("/create");
     };
-    return (
-        <div className="container">
-            <div className="row mt-3">
-                <div className="col-lg-3 card">
-                    <img src={icon} alt="Profile Picture" className="card-img-top img-circle"/>
-                    <p className="text-center">{localStorage.getItem("username")}</p>
-                    <button className="buttonAccount mb-2">Account Settings</button>
-                    <button className="buttonAccount mb-2" onClick={createRecipe}>Create New Recipe</button>
-                    {/* Change username/password, Change profile pic, Change Visiblity, Delete Account */}
-                    <button className="buttonAccount">Food Preferences</button>
-                    {/* Change diet and restrictions that automatically apply */}
-                    <button className="buttonAccount mt-2" onClick={search}>Search</button>
-                </div>
-                <div className="col-lg-9 card">
-                    <h3 className="ff-font pt-3">Your recipes</h3>
-                    {/* List of created recipes */}
-                    <div className="row flex-row flex-nowrap scrollable py-2">
-                        {userRecipes.map(data => (
-                            <Col xs={3} className="mb-2" key={'${data.id}'}>
-                                <RecipeCard data={data} />
-                            </Col>
-                        ))}
-                        <Col xs={3} className="mb-2" key={'${data.id}'}>
-                            <UtilityCard data={your_recipes} />
-                        </Col>
+
+    if(localStorage.getItem("jwt") !== null) {
+        return (
+            <div className="container">
+                <div className="row mt-3">
+                    <div className="col-lg-3 card">
+                        <img src={icon} alt="Profile Picture" className="card-img-top img-circle"/>
+                        <p className="text-center">{localStorage.getItem("username")}</p>
+                        <button className="buttonAccount mb-2">Account Settings</button>
+                        <button className="buttonAccount mb-2" onClick={createRecipe}>Create New Recipe</button>
+                        {/* Change username/password, Change profile pic, Change Visiblity, Delete Account */}
+                        <button className="buttonAccount">Food Preferences</button>
+                        {/* Change diet and restrictions that automatically apply */}
+                        <button className="buttonAccount mt-2" onClick={search}>Search</button>
                     </div>
-                    <h3 className="ff-font pt-3">Favorite recipes</h3>
-                    <div className="row flex-row flex-nowrap scrollable py-2">
-                        {favoriteRecipes.map(data => (
+                    <div className="col-lg-9 card">
+                        <h3 className="ff-font pt-3">Your recipes</h3>
+                        {/* List of created recipes */}
+                        <div className="row flex-row flex-nowrap scrollable py-2">
+                            {userRecipes.map(data => (
+                                <Col xs={3} className="mb-2" key={'${data.id}'}>
+                                    <RecipeCard data={data} />
+                                </Col>
+                            ))}
                             <Col xs={3} className="mb-2" key={'${data.id}'}>
-                                <RecipeCard data={data} />
+                                <UtilityCard data={your_recipes} />
                             </Col>
-                        ))}
-                        <Col xs={3} className="mb-2">
-                            <UtilityCard data={favorite_recipes} />
-                        </Col>
+                        </div>
+                        <h3 className="ff-font pt-3">Favorite recipes</h3>
+                        <div className="row flex-row flex-nowrap scrollable py-2">
+                            {favoriteRecipes.map(data => (
+                                <Col xs={3} className="mb-2" key={'${data.id}'}>
+                                    <RecipeCard data={data} />
+                                </Col>
+                            ))}
+                            <Col xs={3} className="mb-2">
+                                <UtilityCard data={favorite_recipes} />
+                            </Col>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return <Redirect to="/"/>
+    }
+
+    
 }
 export default ProfilePage
