@@ -27,8 +27,10 @@ public class AppUser {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.uploaded = new ArrayList<>();
-		this.favorited = new ArrayList<>();
+		this.uploaded = new ArrayList<Integer>();
+		uploaded.add(-1);
+		this.favorited = new ArrayList<Integer>();
+		favorited.add(-1);
 		this.preferences = new Preferences();
 	}
 
@@ -73,7 +75,7 @@ public class AppUser {
 	}
 	
 	public List<Integer> getUploaded() {
-		return this.uploaded;
+		return uploaded;
 	}
 	
 	public void setUploaded(List<Integer> uploaded) {

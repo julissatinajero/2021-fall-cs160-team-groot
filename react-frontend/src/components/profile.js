@@ -1,4 +1,4 @@
-import React, {useState, Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import "../css/profile.css"
 import icon from '../resources/StockFood.png';
 
@@ -7,18 +7,20 @@ import dmmydata from '../dummyData';
 import RecipeCard from '../components/recipeCard';
 import UtilityCard from '../components/utilityCard';
 
+import RecipeDataService from '../services/recipe.service';
 import UserDataService from '../services/user.service';
+
 
 // To get to profile page, we need the user credentials, otherwise return to the home page
 
 // Messages for the cards at the end of the profile list
-let your_recipes = {
+const your_recipes = {
     id: 100,
     "message": "View all of your created recipes",
     "locmessage": "View"
 }
 
-let favorite_recipes = {
+const favorite_recipes = {
     id: 101,
     "message": "View all of your favorited recipes",
     "locmessage": "View"
@@ -27,7 +29,32 @@ let favorite_recipes = {
 
 
 const ProfilePage = (props) => {
-    const [username, setUsername] = useState(null);
+    const [userRecipes, setUserRecipes] = useState([]);
+    const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+    
+    useEffect(() => {
+        UserDataService.getUploads(localStorage.getItem("username"))
+        .then((response) => {
+            return response.data;
+        })
+        .then((response2) => {
+            RecipeDataService.getRecipesByIds(response2).then((response2) => {
+                setUserRecipes(response2.data);
+            })
+        })
+
+        UserDataService.getFavorites(localStorage.getItem("username"))
+            .then((response) => {
+                return response.data;
+            })
+            .then((response2) => {
+                setFavoriteRecipes(response2);
+            })
+            
+    }, []);
+
+    console.log(userRecipes);
+
     // Redirect if no credentials were placed in
     // If props has id, try to retrieve
     // If retrieval is not possible, return error
@@ -52,7 +79,7 @@ const ProfilePage = (props) => {
                     <h3 className="ff-font pt-3">Your recipes</h3>
                     {/* List of created recipes */}
                     <div className="row flex-row flex-nowrap scrollable py-2">
-                        {dmmydata.map(data => (
+                        {userRecipes.map(data => (
                             <Col xs={3} className="mb-2" key={'${data.id}'}>
                                 <RecipeCard data={data} />
                             </Col>
@@ -63,7 +90,7 @@ const ProfilePage = (props) => {
                     </div>
                     <h3 className="ff-font pt-3">Favorite recipes</h3>
                     <div className="row flex-row flex-nowrap scrollable py-2">
-                        {dmmydata.map(data => (
+                        {favoriteRecipes.map(data => (
                             <Col xs={3} className="mb-2" key={'${data.id}'}>
                                 <RecipeCard data={data} />
                             </Col>

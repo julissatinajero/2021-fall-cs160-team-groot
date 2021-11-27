@@ -25,5 +25,15 @@ class RecipeService {
     getRecipeByIngredients(ingredient) {
         return http.get(`/recipe/ingredients`, ingredient)
     }
+
+    getRecipesByIds(id) {
+        let path = "/recipe/ids?id=";
+        for(let i = 0; i < id.length - 1; i++) {
+            path += id[i];
+            path+= ",";
+        }
+        path += id[id.length - 1];
+        return http.get(path);
+    }
 }
 export default new RecipeService();
