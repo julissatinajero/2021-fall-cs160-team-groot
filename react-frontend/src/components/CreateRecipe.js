@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../css/createRecipe.css';
-import {Button, Form, Row,} from 'react-bootstrap';
+import {Button, Form, Row, Col} from 'react-bootstrap';
 import validationCreateRecipe from "./createRecipeValidation"
 
 // import RecipeDataService from '../services/recipe.services';
@@ -129,14 +129,21 @@ const CreateRecipePage = (props) => {
         );
     };
 
+    // Redirect to profile
+    const returnToProfile = () => {
+        props.history.push("/profile");
+   };
+
     return (
         <div className="outer-container-Create">
             <div className="inner-container-Create">
                 <Form className="form-style-Create">
                     <h1 className="create-form-title">Create a new recipe</h1>
                     <Row>
-                        <div className="Author-Date">Author: {username}</div>
-                        <div className="Author-Date">Date: {dateDetails}</div>
+                        <div className="AuthorDateDiv">
+                            <div className="Author-Date">Author: {username}</div>
+                            <div className="Author-Date">Date: {dateDetails}</div>
+                        </div>
                     </Row>
                     <Row>
                         <Form.Group className="mb-1" controlId="recipeID">
@@ -180,7 +187,7 @@ const CreateRecipePage = (props) => {
                         <div class="col-10">
                             {/**<Form.Group className="mb-3" controlId="directions">*/}
                                 {/**</div><Form.Label>List the instructions</Form.Label>*/}
-                                <h3>List the instructions</h3>
+                                <h4>List the instructions</h4>
                                 {
                                     directionList.map((element, index) => {
                                         return(
@@ -212,7 +219,7 @@ const CreateRecipePage = (props) => {
                     </Row>
                     <Row>
                         <div class="col-10">
-                            <h3>List of Ingredients</h3>
+                            <h4>List of Ingredients</h4>
                             {/**<Form.Group className="mb-3" controlId="ingredients">*/}
                                 {/**<Form.Label>List the ingredients</Form.Label>**/}
                                 {
@@ -342,7 +349,14 @@ const CreateRecipePage = (props) => {
                             {errors.calorieCount && <p className="error">{errors.calorieCount}</p>}
                         </Form.Group>
                     </Row>
-                    <Button className="create-recipe-submitBtn" type="submit" onClick={HandleFormSubmit}>Submit</Button>
+                    <Row>
+                        <Col>
+                            <Button className="create-recipe-submitBtn" type="submit" onClick={HandleFormSubmit}>Submit</Button>
+                        </Col>
+                        <Col>
+                            <Button className="create-recipe-submitBtn" onClick={returnToProfile}>Return</Button>                        
+                        </Col>
+                    </Row>
                 </Form>
             </div>
         </div>
