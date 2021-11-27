@@ -19,12 +19,12 @@ const CreateRecipePage = (props) => {
 
     const [values, setValues] = useState({
         recipeID: "", // Need to figure out a way to generate this
-        name: "", 
+        name: "", // aka recipe Title
         authorID: "",
-        ingredients: [], // Disabled until I figure out how to add to the list
-        directions: [], //aka Instructions; Disabled until I figure out how to add to the list
-        menu: [], // aka Diet; // Disabled until I figure out how to add to the list
-        restrictions: [], // Disabled until I figure out how to add to the list
+        ingredients: [], 
+        directions: [], //aka Instructions
+        menu: [], // aka Diet
+        restrictions: [],
         calorieCount: "",
         prepTime: ""
     });
@@ -65,6 +65,7 @@ const CreateRecipePage = (props) => {
     // Diet information
     const [dietList, addDietList] = useState([]);
     const handleDietChange = e => {
+        // Update the diet list with the current diets that are selected
         if (e.target.checked) {
             addDietList([...dietList, e.target.id]);
         } else {
@@ -75,6 +76,7 @@ const CreateRecipePage = (props) => {
     // Restriction information
     const [restrictionList, addRestrictionList] = useState([]);
     const handleRestrictionChange = e => {
+        // Update the restriction list with the current restrictions that are selected
         if (e.target.checked) {
             addRestrictionList([...restrictionList, e.target.id]);
         } else {
@@ -175,6 +177,74 @@ const CreateRecipePage = (props) => {
                         </Form.Group>
                     </Row>
                     <Row>
+                        <div class="col-10">
+                            {/**<Form.Group className="mb-3" controlId="directions">*/}
+                                {/**</div><Form.Label>List the instructions</Form.Label>*/}
+                                <h3>List the instructions</h3>
+                                {
+                                    directionList.map((element, index) => {
+                                        return(
+                                            <div key={`direction-${index}`}>
+                                            <Form.Group className="mb-1" controlId={`direction-${index}`}>
+                                                <Form.Label>{`Step #${index + 1}`}</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name={`dir-${index}`}
+                                                    data-idx={`${index}`}
+                                                    value={directionList[index].value}
+                                                    placeholder="Instruction"
+                                                    onChange={HandleDirectionChange}
+                                                />
+                                            </Form.Group>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            {/**</Form.Group>**/}
+                        </div>
+                        <div class="col-2">
+                            <div className="outer-div-one-btn">
+                                <div className="outer-div-two-btn">
+                                    <Button className="plus-button" onClick={addDirection}>Add</Button>
+                                </div>
+                            </div>
+                        </div>
+                    </Row>
+                    <Row>
+                        <div class="col-10">
+                            <h3>List of Ingredients</h3>
+                            {/**<Form.Group className="mb-3" controlId="ingredients">*/}
+                                {/**<Form.Label>List the ingredients</Form.Label>**/}
+                                {
+                                    ingredientList.map((element, index) => {
+                                        return(
+                                            <div key={`ingredient-${index}`}>
+                                            <Form.Group className="mb-1" controlId={`ingredient-${index}`}>
+                                                <Form.Label>{`Item #${index + 1}`}</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name={`ing-${index}`}
+                                                    data-idx={`${index}`}
+                                                    value={ingredientList[index].value}
+                                                    placeholder="Ingredient"
+                                                    onChange={HandleIngredientChange}
+                                                />
+                                            </Form.Group>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {/**</Form.Group>**/}
+                        </div>
+                        <div class="col-2">
+                            <div className="outer-div-one-btn">
+                                <div className="outer-div-two-btn">
+                                    <Button className="plus-button" onClick={addIngredient}>Add</Button>
+                                </div>
+                            </div>
+                        </div>
+                    </Row>
+                    <Row>
                         <div style={{ paddingBottom: "15px" }}>
                         <Form.Label >Diet</Form.Label>
                         {['checkbox'].map((type) => (
@@ -244,74 +314,6 @@ const CreateRecipePage = (props) => {
                                 />
                             </div>
                         ))}
-                        </div>
-                    </Row>
-                    <Row>
-                        <div class="col-10">
-                            {/**<Form.Group className="mb-3" controlId="directions">*/}
-                                {/**</div><Form.Label>List the instructions</Form.Label>*/}
-                                <h3>List the instructions</h3>
-                                {
-                                    directionList.map((element, index) => {
-                                        return(
-                                            <div key={`direction-${index}`}>
-                                            <Form.Group className="mb-1" controlId={`direction-${index}`}>
-                                                <Form.Label>{`Step #${index + 1}`}</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    name={`dir-${index}`}
-                                                    data-idx={`${index}`}
-                                                    value={directionList[index].value}
-                                                    placeholder="Instruction"
-                                                    onChange={HandleDirectionChange}
-                                                />
-                                            </Form.Group>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            {/**</Form.Group>**/}
-                        </div>
-                        <div class="col-2">
-                            <div className="outer-div-one-btn">
-                                <div className="outer-div-two-btn">
-                                    <Button className="plus-button" onClick={addDirection}>Add</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </Row>
-                    <Row>
-                        <div class="col-10">
-                            <h3>List of Ingredients</h3>
-                            {/**<Form.Group className="mb-3" controlId="ingredients">*/}
-                                {/**<Form.Label>List the ingredients</Form.Label>**/}
-                                {
-                                    ingredientList.map((element, index) => {
-                                        return(
-                                            <div key={`ingredient-${index}`}>
-                                            <Form.Group className="mb-1" controlId={`ingredient-${index}`}>
-                                                <Form.Label>{`Item #${index + 1}`}</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    name={`ing-${index}`}
-                                                    data-idx={`${index}`}
-                                                    value={ingredientList[index].value}
-                                                    placeholder="Ingredient"
-                                                    onChange={HandleIngredientChange}
-                                                />
-                                            </Form.Group>
-                                            </div>
-                                        )
-                                    })
-                                }
-                                {/**</Form.Group>**/}
-                        </div>
-                        <div class="col-2">
-                            <div className="outer-div-one-btn">
-                                <div className="outer-div-two-btn">
-                                    <Button className="plus-button" onClick={addIngredient}>Add</Button>
-                                </div>
-                            </div>
                         </div>
                     </Row>
                     <Row>
