@@ -62,7 +62,10 @@ const ProfilePage = (props) => {
 
     const search = () => {
         props.history.push("/search");
-   };
+    };
+   const createRecipe = () => {
+    props.history.push("/create");
+    };
     return (
         <div className="container">
             <div className="row mt-3">
@@ -70,6 +73,7 @@ const ProfilePage = (props) => {
                     <img src={icon} alt="Profile Picture" className="card-img-top img-circle"/>
                     <p className="text-center">{localStorage.getItem("username")}</p>
                     <button className="buttonAccount mb-2">Account Settings</button>
+                    <button className="buttonAccount mb-2" onClick={createRecipe}>Create New Recipe</button>
                     {/* Change username/password, Change profile pic, Change Visiblity, Delete Account */}
                     <button className="buttonAccount">Food Preferences</button>
                     {/* Change diet and restrictions that automatically apply */}
