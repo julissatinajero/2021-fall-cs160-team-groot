@@ -10,11 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class AppUser {
 	@Id
-	private String userID;
+	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String username;
 	private String password;
 	private List<Integer> uploaded;
 	private List<Integer> favorited;
@@ -23,23 +22,16 @@ public class AppUser {
 	public AppUser() {}
 	
 	public AppUser(String firstName, String lastName, String email, String username, String password) {
-		this.userID = UUID.nameUUIDFromBytes(email.getBytes()).toString();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.uploaded = new ArrayList<>();
-		this.favorited = new ArrayList<>();
+		this.uploaded = new ArrayList<Integer>();
+		uploaded.add(-1);
+		this.favorited = new ArrayList<Integer>();
+		favorited.add(-1);
 		this.preferences = new Preferences();
-	}
-	
-	public String getUserID() {
-		return userID;
-	}
-	
-	public void setUserID(String userID) {
-		this.userID = userID;
 	}
 
 	public String getFirstName() {
@@ -83,7 +75,7 @@ public class AppUser {
 	}
 	
 	public List<Integer> getUploaded() {
-		return this.uploaded;
+		return uploaded;
 	}
 	
 	public void setUploaded(List<Integer> uploaded) {
