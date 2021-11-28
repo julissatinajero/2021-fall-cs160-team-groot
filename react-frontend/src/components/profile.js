@@ -62,8 +62,11 @@ const ProfilePage = (props) => {
     // If retrieval is not possible, return error
     console.log(props);
 
-    const search = () => {
+    const redirectSearch = () => {
         props.history.push("/search");
+    };
+    const redirectHome = () => {
+        props.history.push("/");
     };
     const createRecipe = () => {
         props.history.push("/create");
@@ -79,7 +82,8 @@ const ProfilePage = (props) => {
                         {/* Change username/password, Change profile pic, Change Visiblity, Delete Account */}
                         {/* <button className="buttonAccount mb-2">Account Settings</button> */}
                         <button className="buttonAccount mb-2" onClick={createRecipe}>Create New Recipe</button>
-                        <button className="buttonAccount mt-2" onClick={search}>Search</button>
+                        <button className="buttonAccount mt-2" onClick={redirectSearch}>Search</button>
+                        <button className="buttonAccount mt-2" onClick={redirectHome}>Return Home</button>
                     </div>
                     <div className="col-lg-9 card">
                         <h3 className="ff-font pt-3">Your recipes</h3>
