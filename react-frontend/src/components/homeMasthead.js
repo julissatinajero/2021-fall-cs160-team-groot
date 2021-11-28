@@ -31,6 +31,13 @@ const HomeMasthead = (props) => {
         setWordTerm(val.target.value);
     }
 
+    const signOutHandler = () => {
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("username");
+        this.props.history.push("/");
+        alert("User successfully signed out.");
+    }
+
     // Redirect Results
     if(redirectResults.redirect != null){
         return <Redirect push to={{
@@ -49,11 +56,23 @@ const HomeMasthead = (props) => {
                         <div className="d-flex justify-content-center my-3">
                             <input type="text" className="searchBar py-1" onChange={setData} value={wordTerm}/>
                             <button className="buttonSearch col-1 py-1" onClick={redirectSearch}><FontAwesomeIcon icon={faSearch}/></button>
-                        </div>                            
-                        <div className="row d-flex justify-content-center">
-                            <button className="buttonHome col-4 mx-2" onClick={redirectSignin}>Sign-In</button>
-                            <button className="buttonHome col-4 mx-2" onClick={redirectSignup}>Sign-Up</button>
                         </div>
+                        <div className="row d-flex justify-content-center">
+                                {
+                                    (localStorage.getItem("jwt") === null) ?
+                                    <button className="buttonHome col-4 mx-2" onClick={redirectSignin}>Sign-In</button> :
+                                    <button className="buttonHome col-4 mx-2" onClick={signOutHandler}>Sign-Out</button>
+                                }
+                                {
+                                    (localStorage.getItem("jwt") === null) ?
+                                    <button className="buttonHome col-4 mx-2" onClick={redirectSignup}>Sign-Up</button> :
+                                    null
+                                }
+                            </div>                       
+                        {/**<div className="row d-flex justify-content-center">*/}
+                            {/**<button className="buttonHome col-4 mx-2" onClick={redirectSignin}>Sign-In</button>
+                            <button className="buttonHome col-4 mx-2" onClick={redirectSignup}>Sign-Up</button>*/}
+                        {/**</div>*/}
                     </div>
                 </div>
                 <div className="col-5 px-0">
