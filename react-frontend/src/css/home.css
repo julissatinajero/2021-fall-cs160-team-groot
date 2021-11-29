@@ -38,3 +38,11 @@
     border-color: #6d7fa7;
     padding-left: 10px;
   }
+
+  .padding-fix {
+    padding: 0px !important;
+  }
+
+  .remove-bg {
+    background-image: none !important;
+  }
