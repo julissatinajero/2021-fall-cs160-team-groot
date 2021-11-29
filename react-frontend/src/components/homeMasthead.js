@@ -1,4 +1,5 @@
 import React, {Component, useState, useEffect } from "react";
+import {Row, Col} from 'react-bootstrap';
 import { Link, Redirect } from "react-router-dom";
 import '../css/home.css';
 import head from '../resources/StockFood.png';
@@ -31,6 +32,10 @@ const HomeMasthead = (props) => {
         setWordTerm(val.target.value);
     }
 
+    const redirectProfile = () =>{
+        this.props.history.push("/profile")
+    }
+
     const signOutHandler = () => {
         localStorage.removeItem("jwt");
         localStorage.removeItem("username");
@@ -61,7 +66,10 @@ const HomeMasthead = (props) => {
                                 {
                                     (localStorage.getItem("jwt") === null) ?
                                     <button className="buttonHome col-4 mx-2" onClick={redirectSignin}>Sign-In</button> :
-                                    <button className="buttonHome col-4 mx-2" onClick={signOutHandler}>Sign-Out</button>
+                                    ( <div className="row d-flex justify-content-center">
+                                            <button className="buttonHome col-4 mx-2" onClick={redirectProfile}>Profile</button>
+                                            <button className="buttonHome col-4 mx-2" onClick={signOutHandler}>Sign-Out</button>
+                                    </div>)
                                 }
                                 {
                                     (localStorage.getItem("jwt") === null) ?

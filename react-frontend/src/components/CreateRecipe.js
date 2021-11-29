@@ -159,8 +159,6 @@ const CreateRecipePage = (props) => {
                         </Form.Group>
                     </Row>
                     <Row>
-                    </Row>
-                    <Row>
                         <Form.Group className="mb-1" controlId="name">
                             <Form.Label>Title of Recipe</Form.Label>
                             <Form.Control

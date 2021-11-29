@@ -119,33 +119,6 @@ const SignUpPage = (props) => {
                                         onChange={HandleChange} />
                                     {errors.password && <p className="error">{errors.password}</p>}
                                 </Form.Group>
-
-                                <Form.Label>Diet</Form.Label>
-                                {['checkbox'].map((type) => (
-                                    <div key={`inline-${type}`} className="mb-3">
-                                        <Form.Check
-                                            inline
-                                            label="Pescatarian"
-                                            name="group1"
-                                            type={type}
-                                            id={`inline-${type}-1`}
-                                        />
-                                        <Form.Check
-                                            inline
-                                            label="Vegetarian"
-                                            name="group1"
-                                            type={type}
-                                            id={`inline-${type}-2`}
-                                        />
-                                        <Form.Check
-                                            inline
-                                            label="Vegan"
-                                            name="group1"
-                                            type={type}
-                                            id={`inline-${type}-2`}
-                                        />
-                                    </div>
-                                ))}
                                 <Row>
                                     <Col>
                                         <div className="text-center">
