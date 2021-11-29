@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Row, Col} from 'react-bootstrap';
 import { Link, Redirect } from "react-router-dom";
 import '../css/home.css';
 import head from '../resources/StockFood.png';
@@ -17,6 +18,10 @@ export default class HomeMasthead extends Component {
     // This will need to be changed when incorporating search terms
     redirectSearch = () =>{
         this.props.history.push("/search")
+    }
+
+    redirectProfile = () =>{
+        this.props.history.push("/profile")
     }
 
     signOutHandler = () => {
@@ -43,7 +48,10 @@ export default class HomeMasthead extends Component {
                                 {
                                     (localStorage.getItem("jwt") === null) ?
                                     <button className="buttonHome col-4 mx-2" onClick={this.redirectSignin}>Sign-In</button> :
-                                    <button className="buttonHome col-4 mx-2" onClick={this.signOutHandler}>Sign-Out</button>
+                                    ( <div className="row d-flex justify-content-center">
+                                            <button className="buttonHome col-4 mx-2" onClick={this.redirectProfile}>Profile</button>
+                                            <button className="buttonHome col-4 mx-2" onClick={this.signOutHandler}>Sign-Out</button>
+                                    </div>)
                                 }
                                 {
                                     (localStorage.getItem("jwt") === null) ?
