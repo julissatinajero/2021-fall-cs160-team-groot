@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+
+html{
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: url("https://cdn.dribbble.com/users/6407551/screenshots/14739480/media/ad2c082fe7c323212f51ff9e48bd00b7.png?compress=1&resize=1600x1200");
+    background-size:cover;
+}
+
+.background {
+    height: 100%;
+    background-image: url("https://cdn.dribbble.com/users/6407551/screenshots/14739480/media/ad2c082fe7c323212f51ff9e48bd00b7.png?compress=1&resize=1600x1200") !important;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color: #89d197;
+    background-size: 100% 100%;
+}
+
+.displayCard {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.ff-font {
+  font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+  color: #6da778;
+}
+
+.notesFieldsFont {
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    color: #6da778;
+
+}
+
+.regularFont{
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+
+}
+
+.titleFont{
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    color: #6da778;
+    text-align: center;
+}
+
+.subheaderFont{
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    color: #6da778;
+    font-size: 15px;
+}
+
+.profileFont{
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.instructionsFont{
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    font-size: 1.15em;
+}
+
+.favoriteButton{
+    color:firebrick;
+    width: 100%;
+}
+
+.returnToSearch-button{
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-top: 10%;
+}
