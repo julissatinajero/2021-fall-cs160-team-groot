@@ -1,0 +1,54 @@
+.outer-container-Create{
+    background-image: url("https://cdn.dribbble.com/users/6407551/screenshots/14739480/media/ad2c082fe7c323212f51ff9e48bd00b7.png?compress=1&resize=1600x1200");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding-top: 3%;
+}
+.create-form-title{
+    text-align: center;
+    font-family: 'Gabriela', Arial, Helvetica, sans-serif;
+    color: #6da778;
+}
+
+.inner-container-Create{
+    margin: auto;
+    width: 60%;
+    background: white;
+    border-radius: 5px;
+}
+
+.form-style-Create{
+    padding: 3%;
+}*/
+
+.Author-Date{
+    padding-bottom: 15px;
+}
+
+.outer-div-one-btn{
+    height: 97px;
+}
+
+.outer-div-two-btn{
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+.create-recipe-submitBtn{
+    background-color: #198754;
+    border-color: #198754;
+    margin: 0 auto;
+    display: block;
+    width: 130px;
+    height: 38px;
+}
+
+.dropdown-btn-formatting{
+    width: 50%;
+}
+
+.plus-button{
+    background-color: #198754;
+    border-color: #198754;
+}
