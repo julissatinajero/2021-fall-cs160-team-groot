@@ -33,13 +33,13 @@ const HomeMasthead = (props) => {
     }
 
     const redirectProfile = () =>{
-        this.props.history.push("/profile")
+        props.history.push("/profile")
     }
 
     const signOutHandler = () => {
         localStorage.removeItem("jwt");
         localStorage.removeItem("username");
-        this.props.history.push("/");
+        props.history.push("/");
         alert("User successfully signed out.");
     }
 
