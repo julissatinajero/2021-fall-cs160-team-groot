@@ -1,0 +1,1 @@
+These are copies of the dockerfiles present in the repository. You should be able to run docker-compose from main; these copies are being stored here as a reference.

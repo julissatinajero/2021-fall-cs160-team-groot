@@ -6,3 +6,22 @@ services:
     ports:
       - "27017:27017"
     
+  spring:
+    container_name: foodfinder-spring
+    image: spring
+    build:
+      context: spring-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "mongo"
+  
+  react:
+    container_name: foodfinder-react
+    image: react
+    build:
+      context: react-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
